@@ -4,8 +4,8 @@ import Logo from './_components/logo'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-background flex max-h-screen min-h-screen flex-col">
-      <nav className="border-border flex h-16 items-center justify-between border-b px-4 py-2">
+    <div className="flex max-h-screen min-h-screen flex-col bg-background">
+      <nav className="container flex h-16 items-center justify-between border-b border-border">
         <Logo />
 
         <div className="flex items-center gap-4">
