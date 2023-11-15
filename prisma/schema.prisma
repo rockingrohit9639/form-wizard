@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Form {
+  id          String  @id @default(cuid())
+  userId      String
+  published   Boolean @default(false)
+  name        String
+  description String  @default("")
+  // 👇 this will hold the form data like fields in JSON.stringfiy format
+  content     String  @default("[]")
+  visits      Int     @default(0)
+  submissions Int     @default(0)
+  shareUrl    String  @default(uuid())
+
+  // Relations
+  formSubmissions FormSubmissions[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FormSubmissions {
+  id String @id @default(cuid())
+
+  form   Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formId String
+  // 👇 this will hold the submission  data in JSON.stringfiy format
+  content String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
