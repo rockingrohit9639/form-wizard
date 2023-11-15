@@ -69,7 +69,7 @@ function StatCard({ className, style, title, description = '', icon, value, unit
         <div className="text-2xl font-bold">
           {loading ? <Skeleton /> : value} {unit}
         </div>
-        <p className="text-muted-foreground pt-1 text-xs">{description}</p>
+        <p className="pt-1 text-xs text-muted-foreground">{description}</p>
       </CardContent>
     </Card>
   )
