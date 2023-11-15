@@ -1,19 +1,18 @@
 'use server'
 
-import { auth, currentUser } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
 import { UserNotFoundError } from '@/lib/error'
 import prisma from '@/lib/db'
 import { CreateFormSchema, createFormSchema } from '@/schema/form'
 
 export async function getFormStats() {
-  const user = await currentUser()
-
-  if (!user) {
+  const { userId } = auth()
+  if (!userId) {
     throw new UserNotFoundError()
   }
 
   const stats = await prisma.form.aggregate({
-    where: { userId: user.id },
+    where: { userId },
     _sum: { visits: true, submissions: true },
   })
 
@@ -54,4 +53,13 @@ export async function createForm(data: CreateFormSchema) {
   })
 
   return formCreated
+}
+
+export async function getForms() {
+  const { userId } = auth()
+  if (!userId) {
+    throw new UserNotFoundError()
+  }
+
+  return prisma.form.findMany({ where: { userId }, orderBy: { createdAt: 'desc' } })
 }

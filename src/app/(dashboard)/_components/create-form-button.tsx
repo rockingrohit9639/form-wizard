@@ -33,7 +33,7 @@ export default function CreateFormButton() {
     try {
       const form = await createForm(values)
       toast({ title: 'Form Created', description: 'Form created successfully!', variant: 'success' })
-      router.push(`/forms/${form.id}`)
+      router.push(`/builder/${form.id}`)
     } catch (error) {
       toast({ title: 'Error', description: 'Something went wrong, please try again later.', variant: 'destructive' })
     }
