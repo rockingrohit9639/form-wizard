@@ -1,6 +1,6 @@
 'use client'
 
-import { useDndMonitor, useDroppable } from '@dnd-kit/core'
+import { useDndMonitor, useDraggable, useDroppable } from '@dnd-kit/core'
 import { useState } from 'react'
 import { TrashIcon } from 'lucide-react'
 import DesignerSidebar from './designer-sidebar'
@@ -50,7 +50,7 @@ export default function Designer() {
             <div className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">Drop here</div>
           ) : null}
 
-          {droppable.isOver ? (
+          {droppable.isOver && fields.length === 0 ? (
             <div className="w-full p-4">
               <div className="h-28 rounded-md bg-primary/20" />
             </div>
@@ -93,10 +93,24 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
     },
   })
 
+  const draggable = useDraggable({
+    id: field.id + '-drag-handler',
+    data: {
+      type: field.type,
+      fieldId: field.id,
+      isDesignerField: true,
+    },
+  })
+
+  if (draggable.isDragging) return null
+
   const DesignerField = FORM_FIELDS[field.type].designerField
 
   return (
     <div
+      ref={draggable.setNodeRef}
+      {...draggable.listeners}
+      {...draggable.attributes}
       className="relative flex h-28 cursor-grab flex-col rounded-md text-foreground ring-1 ring-inset ring-accent"
       onMouseEnter={() => {
         setMouseIsOver(true)
@@ -126,6 +140,7 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
         </>
       ) : null}
 
+      {topHalf.isOver ? <div className="absolute top-0 h-2 w-full rounded-md rounded-b-none bg-primary" /> : null}
       <div
         className={cn(
           'pointer-events-none flex h-28 w-full select-none items-center rounded-md bg-accent/40 px-4 py-2',
@@ -135,6 +150,7 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
         <DesignerField field={field} />
       </div>
       <div className="absolute bottom-0 h-1/2 w-full rounded-b-md" ref={bottomHalf.setNodeRef} />
+      {bottomHalf.isOver ? <div className="absolute bottom-0 h-2 w-full rounded-md rounded-t-none bg-primary" /> : null}
     </div>
   )
 }
