@@ -167,7 +167,7 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
 
   if (draggable.isDragging) return null
 
-  const DesignerField = FORM_FIELDS[field.type].designerField
+  const DesignerField = FORM_FIELDS[field.type].wizardField
 
   return (
     <div

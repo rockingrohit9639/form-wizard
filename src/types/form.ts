@@ -8,17 +8,21 @@ export type Field = {
   /** Construct a new field with random id */
   construct: (id: string) => FieldInstance
 
-  /** A preview button which a user can use to drag over the designer */
-  designerButtonElement: {
+  /** A button to display in sidebar to drag over wizard */
+  wizardButtonElement: {
     icon: React.ReactElement<{ className?: string }>
     label: string
   }
 
-  /** Preview of the field on designer */
-  designerField: React.FC<{
+  /** Preview of the field on wizard */
+  wizardField: React.FC<{
     field: FieldInstance
   }>
-  formComponent: React.FC
+
+  /** Preview of field on preview page */
+  formComponent: React.FC<{
+    field: FieldInstance
+  }>
 
   /** A form which have properties specific to a field type */
   propertiesForm: React.FC<{

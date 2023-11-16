@@ -9,7 +9,7 @@ type FormFieldProps = {
 }
 
 export default function FormField({ field }: FormFieldProps) {
-  const { icon, label } = field.designerButtonElement
+  const { icon, label } = field.wizardButtonElement
   const draggable = useDraggable({
     id: `form-field-${field.type}`,
     data: {
@@ -35,7 +35,7 @@ export default function FormField({ field }: FormFieldProps) {
 }
 
 export function FormFieldOverlay({ field }: FormFieldProps) {
-  const { icon, label } = field.designerButtonElement
+  const { icon, label } = field.wizardButtonElement
 
   return (
     <Button variant="outline" className="flex h-32 w-32 cursor-grab flex-col gap-2 border-primary text-primary">

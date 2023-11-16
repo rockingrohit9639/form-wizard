@@ -38,7 +38,7 @@ export default function DragOverlayWrapper() {
     if (!field) {
       node = <div>Element not found</div>
     } else {
-      const DesignerField = FORM_FIELDS[type].designerField
+      const DesignerField = FORM_FIELDS[type].wizardField
       node = (
         <div className="pointer-events-none flex h-28 w-full rounded-md border bg-accent px-4 py-2 opacity-80">
           <DesignerField field={field} />

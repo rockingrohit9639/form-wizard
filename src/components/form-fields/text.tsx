@@ -27,12 +27,12 @@ export const TextField: Field = {
     type,
     extraAttributes,
   }),
-  designerButtonElement: {
+  wizardButtonElement: {
     icon: <TextIcon />,
     label: 'Text Field',
   },
-  designerField: DesignerField,
-  formComponent: () => <div>Form component</div>,
+  wizardField: WizardField,
+  formComponent: FormComponent,
   propertiesForm: PropertiesComponent,
 }
 
@@ -41,7 +41,7 @@ type TextFieldInstance = FieldInstance & {
 }
 
 /** Field related components */
-function DesignerField({ field }: { field: FieldInstance }) {
+function WizardField({ field }: { field: FieldInstance }) {
   const _field = field as TextFieldInstance
 
   return (
@@ -185,5 +185,23 @@ function PropertiesComponent({ field }: { field: FieldInstance }) {
         />
       </form>
     </Form>
+  )
+}
+
+function FormComponent({ field }: { field: FieldInstance }) {
+  const _field = field as TextFieldInstance
+
+  return (
+    <div className="flex w-full flex-col gap-2">
+      <Label>
+        {_field.extraAttributes.label}
+        {_field.extraAttributes.required ? '*' : null}
+      </Label>
+
+      <Input placeholder={_field.extraAttributes.placeholder} />
+      {_field.extraAttributes.helperText ? (
+        <p className="text-xs text-muted-foreground">{_field.extraAttributes.helperText}</p>
+      ) : null}
+    </div>
   )
 }
