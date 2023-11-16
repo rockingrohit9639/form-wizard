@@ -19,7 +19,11 @@ export type Field = {
     field: FieldInstance
   }>
   formComponent: React.FC
-  propertiesComponent: React.FC
+
+  /** A form which have properties specific to a field type */
+  propertiesForm: React.FC<{
+    field: FieldInstance
+  }>
 }
 
 export type FieldInstance = {

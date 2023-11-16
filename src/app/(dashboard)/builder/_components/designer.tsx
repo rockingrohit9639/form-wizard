@@ -11,7 +11,7 @@ import { generateRandomId } from '@/lib/id'
 import { Button } from '@/components/ui/button'
 
 export default function Designer() {
-  const { fields, addField } = useDesigner()
+  const { fields, addField, selectedField, setSelectedField } = useDesigner()
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
@@ -38,7 +38,14 @@ export default function Designer() {
 
   return (
     <div className="flex h-full w-full">
-      <div className="w-full p-4">
+      <div
+        className="w-full p-4"
+        onClick={() => {
+          if (selectedField) {
+            setSelectedField(null)
+          }
+        }}
+      >
         <div
           ref={droppable.setNodeRef}
           className={cn(
@@ -72,7 +79,7 @@ export default function Designer() {
 }
 
 function FieldWrapper({ field }: { field: FieldInstance }) {
-  const { removeField } = useDesigner()
+  const { removeField, setSelectedField } = useDesigner()
   const [mouseIsOver, setMouseIsOver] = useState(false)
 
   const topHalf = useDroppable({
@@ -118,6 +125,10 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
       onMouseLeave={() => {
         setMouseIsOver(false)
       }}
+      onClick={(e) => {
+        e.stopPropagation()
+        setSelectedField(field)
+      }}
     >
       <div className="absolute h-1/2 w-full rounded-t-md" ref={topHalf.setNodeRef} />
 
@@ -127,7 +138,8 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
             <Button
               variant="outline"
               className="flex h-full items-center rounded-md rounded-l-none border bg-red-500"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation()
                 removeField(field.id)
               }}
             >
