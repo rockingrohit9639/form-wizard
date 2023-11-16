@@ -6,6 +6,7 @@ import { FieldInstance } from '@/types/form'
 type DesignerContextType = {
   fields: FieldInstance[]
   addField: (index: number, field: FieldInstance) => void
+  removeField: (id: string) => void
 }
 
 export const DesignerContext = createContext<DesignerContextType | null>(null)
@@ -21,11 +22,16 @@ export default function DesignerContextProvider({ children }: { children: React.
     })
   }
 
+  const removeField = (id: string) => {
+    setFields((prev) => prev.filter((field) => field.id !== id))
+  }
+
   return (
     <DesignerContext.Provider
       value={{
         fields,
         addField,
+        removeField,
       }}
     >
       {children}

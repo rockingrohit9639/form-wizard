@@ -15,7 +15,9 @@ export type Field = {
   }
 
   /** Preview of the field on designer */
-  designerField: React.FC
+  designerField: React.FC<{
+    field: FieldInstance
+  }>
   formComponent: React.FC
   propertiesComponent: React.FC
 }
