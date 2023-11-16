@@ -4,6 +4,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from '@/components/providers'
 import { Toaster } from '@/components/ui/toaster'
+import DesignerContextProvider from '@/contexts/designer-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,10 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <ThemeProvider attribute="class">
-            <Toaster />
-            {children}
-          </ThemeProvider>
+          <DesignerContextProvider>
+            <ThemeProvider attribute="class">
+              <Toaster />
+              {children}
+            </ThemeProvider>
+          </DesignerContextProvider>
         </body>
       </html>
     </ClerkProvider>

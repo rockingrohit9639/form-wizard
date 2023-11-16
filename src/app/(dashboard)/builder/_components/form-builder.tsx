@@ -6,6 +6,7 @@ import PreviewDialogButton from './preview-dialog-button'
 import SaveFormButton from './save-form-button'
 import PublishFormButton from './publish-form-button'
 import Designer from './designer'
+import DragOverlayWrapper from './drag-overlay-wrapper'
 
 type FormBuilderProps = {
   form: Form
@@ -35,6 +36,8 @@ export default function FormBuilder({ form }: FormBuilderProps) {
           <Designer />
         </div>
       </main>
+
+      <DragOverlayWrapper />
     </DndContext>
   )
 }
