@@ -3,6 +3,7 @@
 import { useDndMonitor, useDraggable, useDroppable } from '@dnd-kit/core'
 import { useState } from 'react'
 import { TrashIcon } from 'lucide-react'
+import invariant from 'tiny-invariant'
 import WizardSidebar from './wizard-sidebar'
 import { cn } from '@/lib/utils'
 import { FORM_FIELDS, FieldInstance, FieldTypes } from '@/types/form'
@@ -11,12 +12,12 @@ import { generateRandomId } from '@/lib/id'
 import { Button } from '@/components/ui/button'
 
 export default function Wizard() {
-  const { fields, addField, selectedField, setSelectedField } = useWizard()
+  const { fields, addField, removeField, selectedField, setSelectedField } = useWizard()
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
     data: {
-      isDesignedDropArea: true,
+      isWizardDropArea: true,
     },
   })
 
@@ -26,12 +27,67 @@ export default function Wizard() {
       if (!active || !over) return
 
       const isFormField = active.data.current?.isFormField
+      const isDroppingOverWizardDropArea = over.data?.current?.isWizardDropArea
 
-      if (isFormField) {
+      /**
+       * Handling the case if the field is dropped in wizard area
+       * and not over any existing field
+       * */
+      if (isFormField && isDroppingOverWizardDropArea) {
         const type = active.data.current?.type as FieldTypes
         const newField = FORM_FIELDS[type].construct(generateRandomId())
 
-        addField(0, newField)
+        addField(fields.length, newField)
+        return
+      }
+
+      /**
+       * Handling the case if the field is dropped over existing field
+       */
+      const isDroppingOverExistingFieldOnTopHalf = over.data?.current?.isTopHalf
+      const isDroppingOverExistingFieldOnBottomHalf = over.data?.current?.isBottomHalf
+
+      const isDroppingOverExistingField =
+        isDroppingOverExistingFieldOnTopHalf || isDroppingOverExistingFieldOnBottomHalf
+
+      if (isFormField && isDroppingOverExistingField) {
+        const type = active.data.current?.type as FieldTypes
+        const newField = FORM_FIELDS[type].construct(generateRandomId())
+        const overId = over.data?.current?.fieldId
+
+        const overFieldIndex = fields.findIndex((f) => f.id === overId)
+        invariant(overFieldIndex !== -1, 'Field not found while dropping')
+
+        let indexForNewField = overFieldIndex // assuming that it is on top half
+        if (isDroppingOverExistingFieldOnBottomHalf) {
+          indexForNewField = overFieldIndex + 1
+        }
+
+        addField(indexForNewField, newField)
+      }
+
+      /**
+       * Handling the case if the user is dragging an existing field in wizard
+       */
+      const isDraggingWizardField = active.data?.current?.isWizardField
+      if (isDraggingWizardField && isDroppingOverExistingField) {
+        const activeId = active.data.current?.fieldId
+        const overId = over.data.current?.fieldId
+
+        const activeFieldIndex = fields.findIndex((f) => f.id === activeId)
+        const overFieldIndex = fields.findIndex((f) => f.id === overId)
+
+        invariant(activeFieldIndex !== -1 || overFieldIndex !== -1, 'Field not found')
+
+        const activeField = { ...fields[activeFieldIndex] }
+        removeField(activeId)
+
+        let indexForNewField = overFieldIndex // assuming that it is on top half
+        if (isDroppingOverExistingFieldOnBottomHalf) {
+          indexForNewField = overFieldIndex + 1
+        }
+
+        addField(indexForNewField, activeField)
       }
     },
   })
@@ -105,7 +161,7 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
     data: {
       type: field.type,
       fieldId: field.id,
-      isDesignerField: true,
+      isWizardField: true,
     },
   })
 

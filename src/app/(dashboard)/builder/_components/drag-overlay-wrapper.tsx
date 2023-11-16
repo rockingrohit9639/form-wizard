@@ -31,8 +31,8 @@ export default function DragOverlayWrapper() {
   }
 
   /** In case, if the field is dragged inside designer */
-  const isDesignerField = draggedItem.data.current?.isDesignerField
-  if (isDesignerField) {
+  const isWizardField = draggedItem.data.current?.isWizardField
+  if (isWizardField) {
     const fieldId = draggedItem.data?.current?.fieldId
     const field = fields.find((field) => field.id === fieldId)
     if (!field) {
