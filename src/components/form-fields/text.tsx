@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
-import useDesigner from '@/hooks/use-designer'
+import useWizard from '@/hooks/use-wizard'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Switch } from '../ui/switch'
 
@@ -68,7 +68,7 @@ const propertiesSchema = z.object({
 type PropertiesSchema = z.infer<typeof propertiesSchema>
 
 function PropertiesComponent({ field }: { field: FieldInstance }) {
-  const { updateField } = useDesigner()
+  const { updateField } = useWizard()
 
   const form = useForm<PropertiesSchema>({
     resolver: zodResolver(propertiesSchema),

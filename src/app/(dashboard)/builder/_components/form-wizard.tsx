@@ -5,14 +5,14 @@ import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dn
 import PreviewDialogButton from './preview-dialog-button'
 import SaveFormButton from './save-form-button'
 import PublishFormButton from './publish-form-button'
-import Designer from './designer'
+import Wizard from './wizard'
 import DragOverlayWrapper from './drag-overlay-wrapper'
 
-type FormBuilderProps = {
+type FormWizardProps = {
   form: Form
 }
 
-export default function FormBuilder({ form }: FormBuilderProps) {
+export default function FormWizard({ form }: FormWizardProps) {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10, // 10px
@@ -48,7 +48,7 @@ export default function FormBuilder({ form }: FormBuilderProps) {
         </nav>
 
         <div className="relative flex h-48 w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-          <Designer />
+          <Wizard />
         </div>
       </main>
 

@@ -1,1 +1,1 @@
-export * from './designer-context'
+export * from './wizard-context'

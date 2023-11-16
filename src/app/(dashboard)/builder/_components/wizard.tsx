@@ -3,15 +3,15 @@
 import { useDndMonitor, useDraggable, useDroppable } from '@dnd-kit/core'
 import { useState } from 'react'
 import { TrashIcon } from 'lucide-react'
-import DesignerSidebar from './designer-sidebar'
+import WizardSidebar from './wizard-sidebar'
 import { cn } from '@/lib/utils'
 import { FORM_FIELDS, FieldInstance, FieldTypes } from '@/types/form'
-import useDesigner from '@/hooks/use-designer'
+import useWizard from '@/hooks/use-wizard'
 import { generateRandomId } from '@/lib/id'
 import { Button } from '@/components/ui/button'
 
-export default function Designer() {
-  const { fields, addField, selectedField, setSelectedField } = useDesigner()
+export default function Wizard() {
+  const { fields, addField, selectedField, setSelectedField } = useWizard()
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
@@ -73,13 +73,13 @@ export default function Designer() {
         </div>
       </div>
 
-      <DesignerSidebar />
+      <WizardSidebar />
     </div>
   )
 }
 
 function FieldWrapper({ field }: { field: FieldInstance }) {
-  const { removeField, setSelectedField } = useDesigner()
+  const { removeField, setSelectedField } = useWizard()
   const [mouseIsOver, setMouseIsOver] = useState(false)
 
   const topHalf = useDroppable({

@@ -1,5 +1,5 @@
 import { getFormById } from '@/actions/form'
-import FormBuilder from '../_components/form-builder'
+import FormWizard from '../_components/form-wizard'
 
 type BuilderProps = {
   params: { formId: string }
@@ -8,5 +8,5 @@ type BuilderProps = {
 export default async function Builder({ params }: BuilderProps) {
   const form = await getFormById(params.formId)
 
-  return <FormBuilder form={form} />
+  return <FormWizard form={form} />
 }

@@ -3,7 +3,7 @@
 import { createContext, useState } from 'react'
 import { FieldInstance } from '@/types/form'
 
-type DesignerContextType = {
+type WizardContextType = {
   fields: FieldInstance[]
   addField: (index: number, field: FieldInstance) => void
   removeField: (id: string) => void
@@ -13,9 +13,9 @@ type DesignerContextType = {
   setSelectedField: React.Dispatch<React.SetStateAction<FieldInstance | null>>
 }
 
-export const DesignerContext = createContext<DesignerContextType | null>(null)
+export const WizardContext = createContext<WizardContextType | null>(null)
 
-export default function DesignerContextProvider({ children }: { children: React.ReactNode }) {
+export default function WizardContextProvider({ children }: { children: React.ReactNode }) {
   const [fields, setFields] = useState<FieldInstance[]>([])
   const [selectedField, setSelectedField] = useState<FieldInstance | null>(null)
 
@@ -36,7 +36,7 @@ export default function DesignerContextProvider({ children }: { children: React.
   }
 
   return (
-    <DesignerContext.Provider
+    <WizardContext.Provider
       value={{
         fields,
         addField,
@@ -47,6 +47,6 @@ export default function DesignerContextProvider({ children }: { children: React.
       }}
     >
       {children}
-    </DesignerContext.Provider>
+    </WizardContext.Provider>
   )
 }
