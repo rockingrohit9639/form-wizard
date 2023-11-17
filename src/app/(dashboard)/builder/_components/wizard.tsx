@@ -6,10 +6,11 @@ import { TrashIcon } from 'lucide-react'
 import invariant from 'tiny-invariant'
 import WizardSidebar from './wizard-sidebar'
 import { cn } from '@/lib/utils'
-import { FORM_FIELDS, FieldInstance, FieldTypes } from '@/types/form'
+import { FieldInstance, FieldTypes } from '@/types/form'
 import useWizard from '@/hooks/use-wizard'
 import { generateRandomId } from '@/lib/id'
 import { Button } from '@/components/ui/button'
+import { FORM_FIELDS } from '@/lib/form'
 
 export default function Wizard() {
   const { fields, addField, removeField, selectedField, setSelectedField } = useWizard()

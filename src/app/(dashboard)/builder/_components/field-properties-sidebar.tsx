@@ -1,8 +1,8 @@
 import { XIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useWizard from '@/hooks/use-wizard'
-import { FORM_FIELDS } from '@/types/form'
 import { Separator } from '@/components/ui/separator'
+import { FORM_FIELDS } from '@/lib/form'
 
 export default function FieldPropertiesSidebar() {
   const { selectedField, setSelectedField } = useWizard()

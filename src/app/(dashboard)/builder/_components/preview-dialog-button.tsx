@@ -2,7 +2,7 @@ import { ViewIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useWizard from '@/hooks/use-wizard'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { FORM_FIELDS } from '@/types/form'
+import { FORM_FIELDS } from '@/lib/form'
 
 export default function PreviewDialogButton() {
   const { fields } = useWizard()

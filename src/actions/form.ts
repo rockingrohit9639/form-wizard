@@ -105,3 +105,14 @@ export async function publishForm(id: string) {
 
   return prisma.form.update({ where: { id }, data: { published: true } })
 }
+
+export async function getFormBySubmitUrl(shareUrl: string) {
+  return prisma.form.update({ where: { shareUrl }, data: { visits: { increment: 1 } } })
+}
+
+export async function submitForm(shareUrl: string, content: string) {
+  return prisma.form.update({
+    where: { shareUrl },
+    data: { submissions: { increment: 1 }, formSubmissions: { create: { content } } },
+  })
+}

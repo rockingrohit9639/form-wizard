@@ -1,4 +1,4 @@
-import { TextField } from '@/components/form-fields'
+import { ControllerRenderProps } from 'react-hook-form'
 
 export type FieldTypes = 'TEXT'
 
@@ -22,6 +22,7 @@ export type Field = {
   /** Preview of field on preview page */
   formComponent: React.FC<{
     field: FieldInstance
+    formFieldProps?: ControllerRenderProps<any, any>
   }>
 
   /** A form which have properties specific to a field type */
@@ -37,7 +38,3 @@ export type FieldInstance = {
 }
 
 export type FormFieldsRecord = Record<FieldTypes, Field>
-
-export const FORM_FIELDS: FormFieldsRecord = {
-  TEXT: TextField,
-}

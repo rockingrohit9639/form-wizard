@@ -1,6 +1,6 @@
 import { TextIcon } from 'lucide-react'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { ControllerRenderProps, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
@@ -188,17 +188,17 @@ function PropertiesComponent({ field }: { field: FieldInstance }) {
   )
 }
 
-function FormComponent({ field }: { field: FieldInstance }) {
+function FormComponent({ field, formFieldProps }: { field: FieldInstance; formFieldProps?: ControllerRenderProps }) {
   const _field = field as TextFieldInstance
 
   return (
     <div className="flex w-full flex-col gap-2">
       <Label>
         {_field.extraAttributes.label}
-        {_field.extraAttributes.required ? '*' : null}
+        {_field.extraAttributes.required ? <span className="text-sm text-red-500">*</span> : null}
       </Label>
 
-      <Input placeholder={_field.extraAttributes.placeholder} />
+      <Input placeholder={_field.extraAttributes.placeholder} {...formFieldProps} />
       {_field.extraAttributes.helperText ? (
         <p className="text-xs text-muted-foreground">{_field.extraAttributes.helperText}</p>
       ) : null}

@@ -1,7 +1,7 @@
-import { FORM_FIELDS } from '@/types/form'
 import FormField from './form-field'
 import useWizard from '@/hooks/use-wizard'
 import FieldPropertiesSidebar from './field-properties-sidebar'
+import { FORM_FIELDS } from '@/lib/form'
 
 export default function WizardSidebar() {
   const { selectedField } = useWizard()

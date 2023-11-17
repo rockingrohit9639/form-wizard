@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { RotateCcwIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-export default function BuilderError(error: { error: Error }) {
+export default function SubmitError(error: { error: Error }) {
   // eslint-disable-next-line no-console
   console.log(error)
 
