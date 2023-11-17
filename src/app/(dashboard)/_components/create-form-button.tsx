@@ -44,10 +44,10 @@ export default function CreateFormButton() {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="border-primary/20 hover:border-primary group flex h-48 flex-col items-center justify-center gap-4 border border-dashed hover:cursor-pointer"
+          className="group flex h-48 flex-col items-center justify-center gap-4 border border-dashed border-primary/20 hover:cursor-pointer hover:border-primary"
         >
-          <FilePlusIcon className="text-muted-foreground group-hover:text-primary h-8 w-8" />
-          <p className="text-muted-foreground group-hover:text-primary text-xl font-medium">Create new form</p>
+          <FilePlusIcon className="h-8 w-8 text-muted-foreground group-hover:text-primary" />
+          <p className="text-xl font-medium text-muted-foreground group-hover:text-primary">Create new form</p>
         </Button>
       </DialogTrigger>
 

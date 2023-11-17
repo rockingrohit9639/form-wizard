@@ -18,26 +18,26 @@ export default async function FormCards() {
               <span className="truncate font-bold">{form.name}</span>
               {form.published ? <Badge>Published</Badge> : <Badge variant="warning">Draft</Badge>}
             </CardTitle>
-            <CardDescription className="text-muted-foreground flex items-center justify-between text-sm">
+            <CardDescription className="flex items-center justify-between text-sm text-muted-foreground">
               {formatDistance(form.createdAt, new Date(), { addSuffix: true })}
               {!form.published ? (
                 <div className="flex items-center gap-2">
-                  <EyeIcon className="text-muted-foreground h-4 w-4" />
+                  <EyeIcon className="h-4 w-4 text-muted-foreground" />
                   <div>{form.visits.toLocaleString()}</div>
 
-                  <FormInputIcon className="text-muted-foreground h-4 w-4" />
+                  <FormInputIcon className="h-4 w-4 text-muted-foreground" />
                   <div>{form.submissions.toLocaleString()}</div>
                 </div>
               ) : null}
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="text-muted-foreground h-5 truncate text-sm">{form.description}</CardContent>
+          <CardContent className="h-5 truncate text-sm text-muted-foreground">{form.description}</CardContent>
 
           <CardFooter className="mt-4">
             {form.published ? (
               <Button asChild>
-                <Link href={`/forms/${form.id}`} className="flex items-center gap-2">
+                <Link href={`/forms/${form.id}`} className="flex w-full items-center gap-2">
                   View Submission
                   <ArrowRight className="h-4 w-4" />
                 </Link>

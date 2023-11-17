@@ -9,7 +9,7 @@ export default function BuilderError(error: { error: Error }) {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-4">
-      <h1 className="text-destructive text-4xl font-bold">Something went wrong!</h1>
+      <h1 className="text-4xl font-bold text-destructive">Something went wrong!</h1>
       <Button asChild>
         <Link href="/">Go back to home</Link>
       </Button>

@@ -19,7 +19,7 @@ export default function Home() {
 
         <Suspense
           fallback={Array.from({ length: 5 }).map((_, idx) => (
-            <Skeleton key={idx} className="border-primary/20 h-48 w-full border-2" />
+            <Skeleton key={idx} className="h-48 w-full border-2 border-primary/20" />
           ))}
         >
           <FormCards />
