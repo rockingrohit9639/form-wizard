@@ -2,17 +2,23 @@
 
 import { Form } from '@prisma/client'
 import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { useEffect, useState } from 'react'
+import { Loader2Icon } from 'lucide-react'
 import PreviewDialogButton from './preview-dialog-button'
 import SaveFormButton from './save-form-button'
 import PublishFormButton from './publish-form-button'
 import Wizard from './wizard'
 import DragOverlayWrapper from './drag-overlay-wrapper'
+import useWizard from '@/hooks/use-wizard'
 
 type FormWizardProps = {
   form: Form
 }
 
 export default function FormWizard({ form }: FormWizardProps) {
+  const { setFields } = useWizard()
+  const [isReady, setIsReady] = useState(false) // to avoid delay while rendering
+
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10, // 10px
@@ -28,6 +34,32 @@ export default function FormWizard({ form }: FormWizardProps) {
 
   const sensors = useSensors(mouseSensor, touchSensor)
 
+  useEffect(
+    function updateFieldsOnMount() {
+      if (isReady) return
+
+      const jsonFields = JSON.parse(form.content)
+      setFields(jsonFields)
+
+      const readyTimeout = setTimeout(() => {
+        setIsReady(true)
+      }, 500)
+
+      return () => {
+        clearTimeout(readyTimeout)
+      }
+    },
+    [form.content, isReady, setFields],
+  )
+
+  if (!isReady) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center">
+        <Loader2Icon className="animate-spin" />
+      </div>
+    )
+  }
+
   return (
     <DndContext sensors={sensors}>
       <main className="flex w-full flex-col">
@@ -40,7 +72,7 @@ export default function FormWizard({ form }: FormWizardProps) {
             <PreviewDialogButton />
             {!form.published ? (
               <>
-                <SaveFormButton />
+                <SaveFormButton id={form.id} />
                 <PublishFormButton />
               </>
             ) : null}

@@ -5,6 +5,7 @@ import { FieldInstance } from '@/types/form'
 
 type WizardContextType = {
   fields: FieldInstance[]
+  setFields: React.Dispatch<React.SetStateAction<FieldInstance[]>>
   addField: (index: number, field: FieldInstance) => void
   removeField: (id: string) => void
   updateField: (id: string, field: FieldInstance) => void
@@ -40,6 +41,7 @@ export default function WizardContextProvider({ children }: { children: React.Re
       value={{
         fields,
         addField,
+        setFields,
         removeField,
         updateField,
         selectedField,

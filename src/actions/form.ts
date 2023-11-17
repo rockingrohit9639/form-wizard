@@ -77,3 +77,17 @@ export async function getFormById(id: string) {
 
   return form
 }
+
+export async function updateFormContent(id: string, fields: string) {
+  const { userId } = auth()
+  if (!userId) {
+    throw new UserNotFoundError()
+  }
+
+  const form = await prisma.form.findUnique({ where: { id, userId } })
+  if (!form) {
+    throw new Error('Form not found!')
+  }
+
+  return prisma.form.update({ where: { id }, data: { content: fields } })
+}
