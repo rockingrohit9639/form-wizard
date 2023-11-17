@@ -5,6 +5,7 @@ specifiers:
   '@dnd-kit/core': ^6.1.0
   '@hookform/resolvers': ^3.3.2
   '@prisma/client': ^5.6.0
+  '@radix-ui/react-alert-dialog': ^1.0.5
   '@radix-ui/react-dialog': ^1.0.5
   '@radix-ui/react-icons': ^1.3.0
   '@radix-ui/react-label': ^2.0.2
@@ -38,6 +39,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.5.7
   prisma: ^5.6.0
   react: ^18
+  react-confetti: ^6.1.0
   react-dom: ^18
   react-hook-form: ^7.48.2
   tailwind-merge: ^2.0.0
@@ -52,6 +54,7 @@ dependencies:
   '@dnd-kit/core': 6.1.0_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 3.3.2_react-hook-form@7.48.2
   '@prisma/client': 5.6.0_prisma@5.6.0
+  '@radix-ui/react-alert-dialog': 1.0.5_odyphbpq4up353b3xkkenmy5wy
   '@radix-ui/react-dialog': 1.0.5_odyphbpq4up353b3xkkenmy5wy
   '@radix-ui/react-icons': 1.3.0_react@18.2.0
   '@radix-ui/react-label': 2.0.2_odyphbpq4up353b3xkkenmy5wy
@@ -67,6 +70,7 @@ dependencies:
   next: 14.0.2_biqbaboplfbrettd7655fr4n2y
   next-themes: 0.2.1_jkbxmum2k66uczeeyfa2ahwyou
   react: 18.2.0
+  react-confetti: 6.1.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.48.2_react@18.2.0
   tailwind-merge: 2.0.0
@@ -572,6 +576,32 @@ packages:
     resolution: {integrity: sha512-yQ8oGX2GVsEYMWGxcovu1uGWPCxV5BFfeeYxqPmuAzUyLT9qmaMXSAhXpb0WrspIeqYzdJpkh2vHModJPgRIaw==}
     dependencies:
       '@babel/runtime': 7.23.2
+    dev: false
+
+  /@radix-ui/react-alert-dialog/1.0.5_odyphbpq4up353b3xkkenmy5wy:
+    resolution: {integrity: sha512-OrVIOcZL0tl6xibeuGt5/+UxoT2N27KCFOPjFyfXMnchxSHZ/OW7cCX2nGlIYJrbHK/fczPcFzAwvNBB6XBNMA==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-compose-refs': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-context': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-dialog': 1.0.5_odyphbpq4up353b3xkkenmy5wy
+      '@radix-ui/react-primitive': 1.0.3_odyphbpq4up353b3xkkenmy5wy
+      '@radix-ui/react-slot': 1.0.2_u5zja476buyywzbvglb2fbhaii
+      '@types/react': 18.2.37
+      '@types/react-dom': 18.2.15
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@radix-ui/react-collection/1.0.3_odyphbpq4up353b3xkkenmy5wy:
@@ -3914,6 +3944,16 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+  /react-confetti/6.1.0_react@18.2.0:
+    resolution: {integrity: sha512-7Ypx4vz0+g8ECVxr88W9zhcQpbeujJAVqL14ZnXJ3I23mOI9/oBVTQ3dkJhUmB0D6XOtCZEM6N0Gm9PMngkORw==}
+    engines: {node: '>=10.18'}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      tween-functions: 1.2.0
+    dev: false
+
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -4519,6 +4559,10 @@ packages:
 
   /tslib/2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+
+  /tween-functions/1.2.0:
+    resolution: {integrity: sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==}
+    dev: false
 
   /type-check/0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
