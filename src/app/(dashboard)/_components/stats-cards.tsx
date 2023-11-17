@@ -39,7 +39,7 @@ export default async function StatsCards() {
         title="Bounce Rate"
         icon={<LogOutIcon className="h-6 w-6 text-red-600" />}
         description="Visits that left without submission"
-        value={stats.submissionRate?.toLocaleString()}
+        value={stats.bounceRate?.toLocaleString()}
         unit="%"
       />
     </div>
@@ -57,7 +57,7 @@ type StatCardProps = {
   loading?: boolean
 }
 
-function StatCard({ className, style, title, description = '', icon, value, unit, loading }: StatCardProps) {
+export function StatCard({ className, style, title, description = '', icon, value, unit, loading }: StatCardProps) {
   return (
     <Card className={className} style={style}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
