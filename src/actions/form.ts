@@ -116,3 +116,12 @@ export async function submitForm(shareUrl: string, content: string) {
     data: { submissions: { increment: 1 }, formSubmissions: { create: { content } } },
   })
 }
+
+export async function getFormWithSubmissions(id: string) {
+  const { userId } = auth()
+  if (!userId) {
+    throw new UserNotFoundError()
+  }
+
+  return prisma.form.findUnique({ where: { id, userId }, include: { formSubmissions: true } })
+}
