@@ -10,7 +10,7 @@ import useWizard from '@/hooks/use-wizard'
 import { Separator } from '@/components/ui/separator'
 import { FORM_FIELDS } from '@/lib/form'
 import { Form } from '@/components/ui/form'
-import ItemsRenderer from './items-renderer'
+import ItemsRenderer from '@/components/items-renderer'
 
 export default function FieldPropertiesSidebar() {
   const { selectedField, setSelectedField, updateField } = useWizard()

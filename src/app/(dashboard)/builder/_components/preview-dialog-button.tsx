@@ -2,19 +2,13 @@ import { ViewIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useWizard from '@/hooks/use-wizard'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import ItemsRenderer, { BaseItem } from './items-renderer'
+import ItemsRenderer from '@/components/items-renderer'
+import { getItemsFromFields } from '@/lib/form'
 
 export default function PreviewDialogButton() {
   const { fields } = useWizard()
 
-  const items: BaseItem[] = fields.map((field) => ({
-    id: field.id,
-    label: field.extraAttributes?.label,
-    type: field.type,
-    required: field.extraAttributes?.required,
-    extraInputProps: { placeholder: field.extraAttributes?.placeholder },
-    description: field.extraAttributes?.helperText,
-  }))
+  const items = getItemsFromFields(fields)
 
   return (
     <Dialog>
