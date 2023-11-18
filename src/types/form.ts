@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { FieldProperty } from './field-property'
 
 export type LayoutFieldTypes = 'TITLE'
-export type InputFieldTypes = 'TEXT'
+export type InputFieldTypes = 'TEXT' | 'BOOLEAN'
 
 export type FieldTypes = LayoutFieldTypes | InputFieldTypes
 
