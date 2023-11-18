@@ -2,10 +2,19 @@ import { ViewIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useWizard from '@/hooks/use-wizard'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { FORM_FIELDS } from '@/lib/form'
+import ItemsRenderer, { BaseItem } from './items-renderer'
 
 export default function PreviewDialogButton() {
   const { fields } = useWizard()
+
+  const items: BaseItem[] = fields.map((field) => ({
+    id: field.id,
+    label: field.extraAttributes?.label,
+    type: field.type,
+    required: field.extraAttributes?.required,
+    extraInputProps: { placeholder: field.extraAttributes?.placeholder },
+    description: field.extraAttributes?.helperText,
+  }))
 
   return (
     <Dialog>
@@ -24,10 +33,7 @@ export default function PreviewDialogButton() {
 
         <div className="flex flex-grow flex-col items-center justify-center bg-accent bg-[url(/paper.svg)] p-4 dark:bg-[url(/paper-dark.svg)]">
           <div className="flex h-full w-full max-w-screen-lg flex-grow flex-col gap-4 overflow-y-auto rounded-lg bg-background p-8">
-            {fields.map((field) => {
-              const FormComponent = FORM_FIELDS[field.type].formComponent
-              return <FormComponent key={field.id} field={field} />
-            })}
+            <ItemsRenderer items={items} />
           </div>
         </div>
       </DialogContent>

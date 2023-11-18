@@ -7,11 +7,11 @@ export default function Title() {}
 const type: FieldTypes = 'TITLE'
 
 const extraAttributes = {
-  title: 'Title',
+  label: 'Title',
 }
 
 const propertiesSchema = z.object({
-  title: z.string().min(2, 'Enter at least 2 characters!').max(50, 'Enter at most 50 characters'),
+  label: z.string().min(2, 'Enter at least 2 characters!').max(50, 'Enter at most 50 characters'),
 })
 
 /** Definition of field */
@@ -32,9 +32,10 @@ export const TitleField: Field = {
     schema: propertiesSchema,
     properties: [
       {
-        id: 'title',
+        id: 'label',
         label: 'Title',
         type: 'TEXT',
+        required: true,
       },
     ],
   },
@@ -51,12 +52,12 @@ function WizardField({ field }: { field: FieldInstance }) {
   return (
     <div className="flex w-full flex-col gap-2">
       <Label className="text-muted-foreground">Title Field</Label>
-      <p className="text-xl font-bold">{_field.extraAttributes.title}</p>
+      <p className="text-xl font-bold">{_field.extraAttributes.label}</p>
     </div>
   )
 }
 
 function FormComponent({ field }: { field: FieldInstance }) {
   const _field = field as TitleFieldInstance
-  return <p className="text-xl font-bold">{_field.extraAttributes.title}</p>
+  return <p className="text-xl font-bold">{_field.extraAttributes.label}</p>
 }

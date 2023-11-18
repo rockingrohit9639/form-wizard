@@ -8,13 +8,15 @@ import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessa
 import { Input } from '@/components/ui/input'
 import { LAYOUT_FIELDS } from '@/lib/form'
 import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 
-type BaseItem = {
+export type BaseItem = {
   id: string
   label: string
   type: FieldTypes
   required?: boolean
   description?: string
+  extraInputProps?: Record<string, any>
 }
 
 type ItemsRendererProps<T> = {
@@ -25,7 +27,7 @@ type ItemsRendererProps<T> = {
 const FIELD_LABELS_TO_IGNORE = [...Object.keys(LAYOUT_FIELDS)]
 
 export default function ItemsRenderer<T extends BaseItem>({ items, control }: ItemsRendererProps<T>) {
-  const getFieldContent = useCallback((type: FieldTypes, field: ControllerRenderProps<any, any>, item: T) => {
+  const getFieldContent = useCallback((type: FieldTypes, item: T, field?: ControllerRenderProps<any, any>) => {
     return match(type)
       .returnType<React.ReactNode>()
       .with('TEXT', () => (
@@ -33,6 +35,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
           onKeyDown={(e) => {
             if (e.key === 'Enter') e.currentTarget.blur()
           }}
+          {...item.extraInputProps}
           {...field}
         />
       ))
@@ -40,30 +43,44 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
       .with('BOOLEAN', () => (
         <div className="flex items-center justify-center gap-4 rounded-md border py-4">
           <div className="text-muted-foreground">No</div>
-          <Switch checked={field.value} onCheckedChange={field.onChange} />
+          <Switch checked={field?.value} onCheckedChange={field?.onChange} />
           <div className="text-muted-foreground">Yes</div>
         </div>
       ))
       .exhaustive()
   }, [])
 
-  return items.map((item) => (
-    <FormField
-      control={control}
-      key={item.id}
-      name={item.id}
-      render={({ field }) => (
-        <FormItem>
-          {FIELD_LABELS_TO_IGNORE.includes(item.type) ? null : (
-            <FormLabel>
-              {item.label} {item.required ? <span className="text-red">*</span> : null}
-            </FormLabel>
-          )}
-          <FormControl>{getFieldContent(item.type, field, item)}</FormControl>
-          <FormDescription>{item?.description}</FormDescription>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  ))
+  return items.map((item) =>
+    typeof control !== 'undefined' ? (
+      <FormField
+        control={control}
+        key={item.id}
+        name={item.id}
+        render={({ field }) => (
+          <FormItem>
+            {FIELD_LABELS_TO_IGNORE.includes(item.type) ? null : (
+              <FormLabel>
+                {item.label} {item.required ? <span className="text-red-500">*</span> : null}
+              </FormLabel>
+            )}
+            <FormControl>{getFieldContent(item.type, item, field)}</FormControl>
+            <FormDescription>{item?.description}</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    ) : (
+      <div key={item.id} className="flex w-full flex-col gap-2">
+        {FIELD_LABELS_TO_IGNORE.includes(item.type) ? null : (
+          <Label>
+            {item.label}
+            {item.required ? <span className="text-sm text-red-500">*</span> : null}
+          </Label>
+        )}
+
+        {getFieldContent(item.type, item)}
+        {item.description ? <p className="text-xs text-muted-foreground">{item.description}</p> : null}
+      </div>
+    ),
+  )
 }

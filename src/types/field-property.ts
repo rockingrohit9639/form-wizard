@@ -5,4 +5,5 @@ export type FieldProperty = {
   label: string
   description?: string
   type: FieldTypes
+  required?: boolean
 }

@@ -43,12 +43,14 @@ export const TextField: Field = {
         label: 'Label',
         type: 'TEXT',
         description: 'The label of the field. It will be displayed above the field!',
+        required: true,
       },
       {
         id: 'placeholder',
         label: 'Placeholder',
         type: 'TEXT',
         description: 'The placeholder of the field.',
+        required: true,
       },
       {
         id: 'helperText',
