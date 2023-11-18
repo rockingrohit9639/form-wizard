@@ -1,7 +1,9 @@
 import { ControllerRenderProps } from 'react-hook-form'
+import { z } from 'zod'
+import { FieldProperty } from './field-property'
 
-type LayoutFieldTypes = 'TITLE'
-type InputFieldTypes = 'TEXT'
+export type LayoutFieldTypes = 'TITLE'
+export type InputFieldTypes = 'TEXT'
 
 export type FieldTypes = LayoutFieldTypes | InputFieldTypes
 
@@ -28,10 +30,11 @@ export type Field = {
     formFieldProps?: ControllerRenderProps<any, any>
   }>
 
-  /** A form which have properties specific to a field type */
-  propertiesForm: React.FC<{
-    field: FieldInstance
-  }>
+  /** Properties for the field */
+  properties: {
+    schema: z.AnyZodObject
+    properties: FieldProperty[]
+  }
 }
 
 export type FieldInstance = {
