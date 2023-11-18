@@ -1,6 +1,5 @@
 import { TextIcon } from 'lucide-react'
 import { z } from 'zod'
-import { ControllerRenderProps } from 'react-hook-form'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
@@ -34,7 +33,6 @@ export const TextField: Field = {
     label: 'Text Field',
   },
   wizardField: WizardField,
-  formComponent: FormComponent,
   properties: {
     schema: propertiesSchema,
     properties: [
@@ -83,24 +81,6 @@ function WizardField({ field }: { field: FieldInstance }) {
       </Label>
 
       <Input readOnly disabled placeholder={_field.extraAttributes.placeholder} />
-      {_field.extraAttributes.helperText ? (
-        <p className="text-xs text-muted-foreground">{_field.extraAttributes.helperText}</p>
-      ) : null}
-    </div>
-  )
-}
-
-function FormComponent({ field, formFieldProps }: { field: FieldInstance; formFieldProps?: ControllerRenderProps }) {
-  const _field = field as TextFieldInstance
-
-  return (
-    <div className="flex w-full flex-col gap-2">
-      <Label>
-        {_field.extraAttributes.label}
-        {_field.extraAttributes.required ? <span className="text-sm text-red-500">*</span> : null}
-      </Label>
-
-      <Input placeholder={_field.extraAttributes.placeholder} {...formFieldProps} />
       {_field.extraAttributes.helperText ? (
         <p className="text-xs text-muted-foreground">{_field.extraAttributes.helperText}</p>
       ) : null}

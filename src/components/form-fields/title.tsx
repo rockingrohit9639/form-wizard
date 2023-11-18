@@ -27,7 +27,6 @@ export const TitleField: Field = {
     label: 'Title Field',
   },
   wizardField: WizardField,
-  formComponent: FormComponent,
   properties: {
     schema: propertiesSchema,
     properties: [
@@ -55,9 +54,4 @@ function WizardField({ field }: { field: FieldInstance }) {
       <p className="text-xl font-bold">{_field.extraAttributes.label}</p>
     </div>
   )
-}
-
-function FormComponent({ field }: { field: FieldInstance }) {
-  const _field = field as TitleFieldInstance
-  return <p className="text-xl font-bold">{_field.extraAttributes.label}</p>
 }

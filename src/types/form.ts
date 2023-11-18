@@ -1,4 +1,3 @@
-import { ControllerRenderProps } from 'react-hook-form'
 import { z } from 'zod'
 import { FieldProperty } from './field-property'
 
@@ -22,12 +21,6 @@ export type Field = {
   /** Preview of the field on wizard */
   wizardField: React.FC<{
     field: FieldInstance
-  }>
-
-  /** Preview of field on preview page */
-  formComponent: React.FC<{
-    field: FieldInstance
-    formFieldProps?: ControllerRenderProps<any, any>
   }>
 
   /** Properties for the field */
