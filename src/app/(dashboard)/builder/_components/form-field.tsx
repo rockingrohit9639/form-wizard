@@ -21,7 +21,7 @@ export default function FormField({ field }: FormFieldProps) {
   return (
     <Button
       variant="outline"
-      className={cn('flex h-32 w-32 cursor-grab flex-col gap-2 border-primary text-primary', {
+      className={cn('flex h-32 w-full cursor-grab flex-col gap-2 border-primary text-primary', {
         'ring-2 ring-primary': draggable.isDragging,
       })}
       ref={draggable.setNodeRef}
@@ -38,7 +38,7 @@ export function FormFieldOverlay({ field }: FormFieldProps) {
   const { icon, label } = field.wizardButtonElement
 
   return (
-    <Button variant="outline" className="flex h-32 w-32 cursor-grab flex-col gap-2 border-primary text-primary">
+    <Button variant="outline" className="flex h-32 w-full cursor-grab flex-col gap-2 border-primary text-primary">
       {cloneElement(icon, { className: 'w-8 h-8' })}
       <p className="text-xs ">{label}</p>
     </Button>

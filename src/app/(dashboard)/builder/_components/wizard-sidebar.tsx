@@ -1,14 +1,13 @@
-import FormField from './form-field'
 import useWizard from '@/hooks/use-wizard'
 import FieldPropertiesSidebar from './field-properties-sidebar'
-import { FORM_FIELDS } from '@/lib/form'
+import FormFieldsSidebar from './form-fields-sidebar'
 
 export default function WizardSidebar() {
   const { selectedField } = useWizard()
 
   return (
     <aside className="flex h-full w-full max-w-sm flex-grow flex-col gap-2 overflow-y-auto border-muted bg-background p-4">
-      {!selectedField ? <FormField field={FORM_FIELDS.TEXT} /> : null}
+      {!selectedField ? <FormFieldsSidebar /> : null}
 
       {selectedField ? <FieldPropertiesSidebar /> : null}
     </aside>

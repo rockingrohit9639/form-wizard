@@ -1,6 +1,9 @@
 import { ControllerRenderProps } from 'react-hook-form'
 
-export type FieldTypes = 'TEXT'
+type LayoutFieldTypes = 'TITLE'
+type InputFieldTypes = 'TEXT'
+
+export type FieldTypes = LayoutFieldTypes | InputFieldTypes
 
 export type Field = {
   type: FieldTypes
@@ -36,5 +39,8 @@ export type FieldInstance = {
   type: FieldTypes
   extraAttributes?: Record<string, any>
 }
+
+export type LayoutFieldsRecord = Record<LayoutFieldTypes, Field>
+export type InputFieldsRecord = Record<InputFieldTypes, Field>
 
 export type FormFieldsRecord = Record<FieldTypes, Field>
