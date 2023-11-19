@@ -3,7 +3,7 @@ import { ArrowRight, EyeIcon, FormInputIcon, PencilIcon } from 'lucide-react'
 import Link from 'next/link'
 import { getForms } from '@/actions/form'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 export default async function FormCards() {
@@ -18,9 +18,9 @@ export default async function FormCards() {
               <span className="truncate font-bold">{form.name}</span>
               {form.published ? <Badge>Published</Badge> : <Badge variant="warning">Draft</Badge>}
             </CardTitle>
-            <CardDescription className="flex items-center justify-between text-sm text-muted-foreground">
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
               {formatDistance(form.createdAt, new Date(), { addSuffix: true })}
-              {!form.published ? (
+              {form.published ? null : (
                 <div className="flex items-center gap-2">
                   <EyeIcon className="h-4 w-4 text-muted-foreground" />
                   <div>{form.visits.toLocaleString()}</div>
@@ -28,8 +28,8 @@ export default async function FormCards() {
                   <FormInputIcon className="h-4 w-4 text-muted-foreground" />
                   <div>{form.submissions.toLocaleString()}</div>
                 </div>
-              ) : null}
-            </CardDescription>
+              )}
+            </div>
           </CardHeader>
 
           <CardContent className="h-5 truncate text-sm text-muted-foreground">{form.description}</CardContent>
