@@ -23,7 +23,7 @@ export const TitleField: Field = {
   }),
   wizardButtonElement: {
     icon: <Heading1Icon />,
-    label: 'Title Field',
+    label: 'Title',
   },
   wizardField: WizardField,
   properties: {

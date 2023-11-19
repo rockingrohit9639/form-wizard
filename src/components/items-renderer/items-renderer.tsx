@@ -48,6 +48,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
         </div>
       ))
       .with('SUB_TITLE', () => <p className="text-lg">{item.label}</p>)
+      .with('PARAGRAPH', () => <p className="text-muted-foreground">{item.label}</p>)
       .exhaustive()
   }, [])
 

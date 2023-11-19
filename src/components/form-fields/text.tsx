@@ -30,7 +30,7 @@ export const TextField: Field = {
   }),
   wizardButtonElement: {
     icon: <TextIcon />,
-    label: 'Text Field',
+    label: 'Text',
   },
   wizardField: WizardField,
   properties: {

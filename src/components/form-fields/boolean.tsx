@@ -24,7 +24,7 @@ export const BooleanField: Field = {
   }),
   wizardButtonElement: {
     icon: <ToggleRightIcon />,
-    label: 'Boolean Field',
+    label: 'Boolean',
   },
   wizardField: WizardField,
   properties: {

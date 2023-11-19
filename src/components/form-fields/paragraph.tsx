@@ -1,12 +1,12 @@
-import { Heading2Icon } from 'lucide-react'
+import { TextIcon } from 'lucide-react'
 import { z } from 'zod'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
 
-const type: FieldTypes = 'SUB_TITLE'
+const type: FieldTypes = 'PARAGRAPH'
 
 const extraAttributes = {
-  label: 'Sub Title',
+  label: 'Paragraph Content',
 }
 
 const propertiesSchema = z.object({
@@ -14,7 +14,7 @@ const propertiesSchema = z.object({
 })
 
 /** Definition of field */
-export const SubTitleField: Field = {
+export const ParagraphField: Field = {
   type,
   construct: (id) => ({
     id,
@@ -22,8 +22,8 @@ export const SubTitleField: Field = {
     extraAttributes,
   }),
   wizardButtonElement: {
-    icon: <Heading2Icon />,
-    label: 'SubTitle',
+    icon: <TextIcon />,
+    label: 'Paragraph',
   },
   wizardField: WizardField,
   properties: {
@@ -31,7 +31,7 @@ export const SubTitleField: Field = {
     properties: [
       {
         id: 'label',
-        label: 'Title',
+        label: 'Paragraph Content',
         type: 'TEXT',
         required: true,
       },
@@ -39,17 +39,17 @@ export const SubTitleField: Field = {
   },
 }
 
-type SubTitleFieldInstance = FieldInstance & {
+type ParagraphFieldInstance = FieldInstance & {
   extraAttributes: typeof extraAttributes
 }
 
 function WizardField({ field }: { field: FieldInstance }) {
-  const _field = field as SubTitleFieldInstance
+  const _field = field as ParagraphFieldInstance
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <Label className="text-muted-foreground">SubTitle Field</Label>
-      <p className="text-lg">{_field.extraAttributes.label}</p>
+      <Label className="text-muted-foreground">Paragraph Field</Label>
+      <p className="text-muted-foreground">{_field.extraAttributes.label}</p>
     </div>
   )
 }
