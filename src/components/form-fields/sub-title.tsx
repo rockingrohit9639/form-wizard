@@ -1,13 +1,12 @@
-import { ToggleRightIcon } from 'lucide-react'
+import { Heading2Icon } from 'lucide-react'
 import { z } from 'zod'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
-import { Switch } from '../ui/switch'
 
-const type: FieldTypes = 'BOOLEAN'
+const type: FieldTypes = 'SUB_TITLE'
 
 const extraAttributes = {
-  label: 'Field Label',
+  label: 'Sub Title',
 }
 
 const propertiesSchema = z.object({
@@ -15,7 +14,7 @@ const propertiesSchema = z.object({
 })
 
 /** Definition of field */
-export const BooleanField: Field = {
+export const SubTitleField: Field = {
   type,
   construct: (id) => ({
     id,
@@ -23,8 +22,8 @@ export const BooleanField: Field = {
     extraAttributes,
   }),
   wizardButtonElement: {
-    icon: <ToggleRightIcon />,
-    label: 'Boolean Field',
+    icon: <Heading2Icon />,
+    label: 'SubTitle Field',
   },
   wizardField: WizardField,
   properties: {
@@ -32,7 +31,7 @@ export const BooleanField: Field = {
     properties: [
       {
         id: 'label',
-        label: 'Label',
+        label: 'Title',
         type: 'TEXT',
         required: true,
       },
@@ -40,22 +39,17 @@ export const BooleanField: Field = {
   },
 }
 
-type BooleanFieldInstance = FieldInstance & {
+type SubTitleFieldInstance = FieldInstance & {
   extraAttributes: typeof extraAttributes
 }
 
 function WizardField({ field }: { field: FieldInstance }) {
-  const _field = field as BooleanFieldInstance
+  const _field = field as SubTitleFieldInstance
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <Label className="text-muted-foreground">Boolean Field</Label>
-      <p>{_field.extraAttributes.label}</p>
-      <div className="flex items-center justify-center gap-4 rounded-md border py-4">
-        <div className="text-muted-foreground">No</div>
-        <Switch disabled />
-        <div className="text-muted-foreground">Yes</div>
-      </div>
+      <Label className="text-muted-foreground">SubTitle Field</Label>
+      <p className="text-lg">{_field.extraAttributes.label}</p>
     </div>
   )
 }

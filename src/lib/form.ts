@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { TextField, BooleanField, TitleField } from '@/components/form-fields'
+import { TextField, BooleanField, TitleField, SubTitleField } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
 
@@ -29,6 +29,7 @@ export function getItemsFromFields(fields: FieldInstance[]): BaseItem[] {
 
 export const LAYOUT_FIELDS: LayoutFieldsRecord = {
   TITLE: TitleField,
+  SUB_TITLE: SubTitleField,
 }
 
 export const INPUT_FIELDS: InputFieldsRecord = {
