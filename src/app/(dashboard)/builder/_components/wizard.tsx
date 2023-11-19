@@ -168,14 +168,14 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
 
   if (draggable.isDragging) return null
 
-  const DesignerField = FORM_FIELDS[field.type].wizardField
+  const WizardField = FORM_FIELDS[field.type].wizardField
 
   return (
     <div
       ref={draggable.setNodeRef}
       {...draggable.listeners}
       {...draggable.attributes}
-      className="relative flex h-28 cursor-grab flex-col rounded-md text-foreground ring-1 ring-inset ring-accent"
+      className="relative flex cursor-grab flex-col rounded-md text-foreground ring-1 ring-inset ring-accent"
       onMouseEnter={() => {
         setMouseIsOver(true)
       }}
@@ -211,12 +211,11 @@ function FieldWrapper({ field }: { field: FieldInstance }) {
 
       {topHalf.isOver ? <div className="absolute top-0 h-2 w-full rounded-md rounded-b-none bg-primary" /> : null}
       <div
-        className={cn(
-          'pointer-events-none flex h-28 w-full select-none items-center rounded-md bg-accent/40 px-4 py-2',
-          { 'opacity-30': mouseIsOver },
-        )}
+        className={cn('pointer-events-none flex w-full select-none items-center rounded-md bg-accent/40 px-4 py-2', {
+          'opacity-30': mouseIsOver,
+        })}
       >
-        <DesignerField field={field} />
+        <WizardField field={field} />
       </div>
       <div className="absolute bottom-0 h-1/2 w-full rounded-b-md" ref={bottomHalf.setNodeRef} />
       {bottomHalf.isOver ? <div className="absolute bottom-0 h-2 w-full rounded-md rounded-t-none bg-primary" /> : null}

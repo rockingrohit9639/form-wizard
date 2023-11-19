@@ -1,12 +1,13 @@
-import { Heading1Icon } from 'lucide-react'
+import { ToggleRightIcon } from 'lucide-react'
 import { z } from 'zod'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
+import { Switch } from '../ui/switch'
 
-const type: FieldTypes = 'TITLE'
+const type: FieldTypes = 'BOOLEAN'
 
 const extraAttributes = {
-  label: 'Title',
+  label: 'Field Label',
 }
 
 const propertiesSchema = z.object({
@@ -14,7 +15,7 @@ const propertiesSchema = z.object({
 })
 
 /** Definition of field */
-export const TitleField: Field = {
+export const BooleanField: Field = {
   type,
   construct: (id) => ({
     id,
@@ -22,8 +23,8 @@ export const TitleField: Field = {
     extraAttributes,
   }),
   wizardButtonElement: {
-    icon: <Heading1Icon />,
-    label: 'Title Field',
+    icon: <ToggleRightIcon />,
+    label: 'Boolean Field',
   },
   wizardField: WizardField,
   properties: {
@@ -31,7 +32,7 @@ export const TitleField: Field = {
     properties: [
       {
         id: 'label',
-        label: 'Title',
+        label: 'Label',
         type: 'TEXT',
         required: true,
       },
@@ -39,17 +40,22 @@ export const TitleField: Field = {
   },
 }
 
-type TitleFieldInstance = FieldInstance & {
+type BooleanFieldInstance = FieldInstance & {
   extraAttributes: typeof extraAttributes
 }
 
 function WizardField({ field }: { field: FieldInstance }) {
-  const _field = field as TitleFieldInstance
+  const _field = field as BooleanFieldInstance
 
   return (
-    <div className="flex w-full flex-col gap-2">
-      <Label className="text-muted-foreground">Title Field</Label>
-      <p className="text-xl font-bold">{_field.extraAttributes.label}</p>
+    <div className="flex w-full flex-col gap-2 py-2">
+      <Label className="text-muted-foreground">Boolean Field</Label>
+      <p>{_field.extraAttributes.label}</p>
+      <div className="flex items-center justify-center gap-4 rounded-md border py-4">
+        <div className="text-muted-foreground">No</div>
+        <Switch disabled />
+        <div className="text-muted-foreground">Yes</div>
+      </div>
     </div>
   )
 }

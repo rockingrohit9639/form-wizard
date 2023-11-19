@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { TextField, TitleField } from '@/components/form-fields'
+import { TextField, BooleanField, TitleField } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
 
@@ -33,6 +33,7 @@ export const LAYOUT_FIELDS: LayoutFieldsRecord = {
 
 export const INPUT_FIELDS: InputFieldsRecord = {
   TEXT: TextField,
+  BOOLEAN: BooleanField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {

@@ -69,7 +69,6 @@ type TextFieldInstance = FieldInstance & {
   extraAttributes: typeof extraAttributes
 }
 
-/** Field related components */
 function WizardField({ field }: { field: FieldInstance }) {
   const _field = field as TextFieldInstance
 
