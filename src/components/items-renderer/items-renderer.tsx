@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { LAYOUT_FIELDS } from '@/lib/form'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
+import { Separator } from '../ui/separator'
 
 export type BaseItem = {
   id: string
@@ -49,6 +50,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
       ))
       .with('SUB_TITLE', () => <p className="text-lg">{item.label}</p>)
       .with('PARAGRAPH', () => <p className="text-muted-foreground">{item.label}</p>)
+      .with('SEPARATOR', () => <Separator />)
       .exhaustive()
   }, [])
 

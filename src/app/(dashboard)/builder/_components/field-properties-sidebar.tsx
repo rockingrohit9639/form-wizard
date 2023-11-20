@@ -4,7 +4,6 @@ import { XIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
-import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import useWizard from '@/hooks/use-wizard'
 import { Separator } from '@/components/ui/separator'
@@ -14,11 +13,11 @@ import ItemsRenderer from '@/components/items-renderer'
 
 export default function FieldPropertiesSidebar() {
   const { selectedField, setSelectedField, updateField } = useWizard()
-  const { properties, schema } = FORM_FIELDS[selectedField!.type].properties
-  type PropertySchema = z.infer<typeof schema>
+  const fieldProperties = FORM_FIELDS[selectedField!.type]?.properties
+  type PropertySchema = Record<string, string | number>
 
   const form = useForm<PropertySchema>({
-    resolver: zodResolver(schema),
+    resolver: fieldProperties?.schema ? zodResolver(fieldProperties.schema) : undefined,
     mode: 'onBlur',
     defaultValues: selectedField?.extraAttributes,
   })
@@ -39,6 +38,10 @@ export default function FieldPropertiesSidebar() {
       ...selectedField,
       extraAttributes: values,
     })
+  }
+
+  if (!fieldProperties) {
+    return <div className="flex h-full w-full items-center justify-center">No properties for this field</div>
   }
 
   return (
@@ -66,7 +69,7 @@ export default function FieldPropertiesSidebar() {
           }}
           className="space-y-4"
         >
-          <ItemsRenderer control={form.control} items={properties} />
+          <ItemsRenderer control={form.control} items={fieldProperties?.properties ?? []} />
         </form>
       </Form>
     </div>

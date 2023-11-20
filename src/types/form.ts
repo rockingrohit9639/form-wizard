@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { FieldProperty } from './field-property'
 
-export type LayoutFieldTypes = 'TITLE' | 'SUB_TITLE' | 'PARAGRAPH'
+export type LayoutFieldTypes = 'TITLE' | 'SUB_TITLE' | 'PARAGRAPH' | 'SEPARATOR'
 export type InputFieldTypes = 'TEXT' | 'BOOLEAN'
 
 export type FieldTypes = LayoutFieldTypes | InputFieldTypes
@@ -24,7 +24,7 @@ export type Field = {
   }>
 
   /** Properties for the field */
-  properties: {
+  properties?: {
     schema: z.AnyZodObject
     properties: FieldProperty[]
   }
