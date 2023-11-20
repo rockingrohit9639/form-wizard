@@ -6,6 +6,8 @@ import {
   SubTitleField,
   ParagraphField,
   SeparatorField,
+  SpacerField,
+  NumberField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -31,6 +33,7 @@ export function getItemsFromFields(fields: FieldInstance[]): BaseItem[] {
     required: field.extraAttributes?.required,
     extraInputProps: { placeholder: field.extraAttributes?.placeholder },
     description: field.extraAttributes?.helperText,
+    extraAttributes: field.extraAttributes,
   }))
 }
 
@@ -39,11 +42,13 @@ export const LAYOUT_FIELDS: LayoutFieldsRecord = {
   SUB_TITLE: SubTitleField,
   PARAGRAPH: ParagraphField,
   SEPARATOR: SeparatorField,
+  SPACER: SpacerField,
 }
 
 export const INPUT_FIELDS: InputFieldsRecord = {
   TEXT: TextField,
   BOOLEAN: BooleanField,
+  NUMBER: NumberField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {

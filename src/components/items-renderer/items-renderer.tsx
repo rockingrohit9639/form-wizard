@@ -17,7 +17,10 @@ export type BaseItem = {
   type: FieldTypes
   required?: boolean
   description?: string
+  /** props which are to be passed to the input elements */
   extraInputProps?: Record<string, any>
+  /** attributes which can be used for particular fields */
+  extraAttributes?: Record<string, any>
 }
 
 type ItemsRendererProps<T> = {
@@ -51,6 +54,17 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
       .with('SUB_TITLE', () => <p className="text-lg">{item.label}</p>)
       .with('PARAGRAPH', () => <p className="text-muted-foreground">{item.label}</p>)
       .with('SEPARATOR', () => <Separator />)
+      .with('SPACER', () => <div style={{ marginBlock: item.extraAttributes?.spacing }} />)
+      .with('NUMBER', () => (
+        <Input
+          type="number"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') e.currentTarget.blur()
+          }}
+          {...item.extraInputProps}
+          {...field}
+        />
+      ))
       .exhaustive()
   }, [])
 
