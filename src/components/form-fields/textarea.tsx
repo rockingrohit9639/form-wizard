@@ -1,16 +1,17 @@
-import { HashIcon } from 'lucide-react'
+import { TextCursorIcon } from 'lucide-react'
 import { z } from 'zod'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
-import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 
-const type: FieldTypes = 'NUMBER'
+const type: FieldTypes = 'TEXTAREA'
 
 const extraAttributes = {
-  label: 'Number Field',
+  label: 'Textarea Field',
   helperText: 'Helper Text',
   required: false,
   placeholder: 'Value here...',
+  rows: 4,
 }
 
 const propertiesSchema = z.object({
@@ -18,10 +19,11 @@ const propertiesSchema = z.object({
   helperText: z.string().max(200, 'Enter at most 200 characters'),
   required: z.boolean().default(false),
   placeholder: z.string().max(50),
+  rows: z.coerce.number().default(4),
 })
 
 /** Definition of field */
-export const NumberField: Field = {
+export const TextareaField: Field = {
   type,
   construct: (id) => ({
     id,
@@ -29,8 +31,8 @@ export const NumberField: Field = {
     extraAttributes,
   }),
   wizardButtonElement: {
-    icon: <HashIcon />,
-    label: 'Number',
+    icon: <TextCursorIcon />,
+    label: 'Textarea',
   },
   wizardField: WizardField,
   properties: {
@@ -57,6 +59,11 @@ export const NumberField: Field = {
         description: 'The help text of the field. It will be displayed below the field!',
       },
       {
+        id: 'rows',
+        label: 'Rows',
+        type: 'NUMBER',
+      },
+      {
         id: 'required',
         label: 'Required',
         type: 'BOOLEAN',
@@ -65,21 +72,21 @@ export const NumberField: Field = {
   },
 }
 
-type TextFieldInstance = FieldInstance & {
+type TextareaFieldInstance = FieldInstance & {
   extraAttributes: typeof extraAttributes
 }
 
 function WizardField({ field }: { field: FieldInstance }) {
-  const _field = field as TextFieldInstance
+  const _field = field as TextareaFieldInstance
 
   return (
     <div className="flex w-full flex-col gap-2">
       <Label>
         {_field.extraAttributes.label}
-        {_field.extraAttributes.required ? <span className="text-red-500">*</span> : null}
+        {_field.extraAttributes.required ? <span className="text-red-500"> *</span> : null}
       </Label>
 
-      <Input readOnly disabled placeholder={_field.extraAttributes.placeholder} />
+      <Textarea readOnly disabled placeholder={_field.extraAttributes.placeholder} rows={_field.extraAttributes.rows} />
       {_field.extraAttributes.helperText ? (
         <p className="text-xs text-muted-foreground">{_field.extraAttributes.helperText}</p>
       ) : null}

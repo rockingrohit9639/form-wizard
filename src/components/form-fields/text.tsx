@@ -76,7 +76,7 @@ function WizardField({ field }: { field: FieldInstance }) {
     <div className="flex w-full flex-col gap-2">
       <Label>
         {_field.extraAttributes.label}
-        {_field.extraAttributes.required ? '*' : null}
+        {_field.extraAttributes.required ? <span className="text-red-500">*</span> : null}
       </Label>
 
       <Input readOnly disabled placeholder={_field.extraAttributes.placeholder} />

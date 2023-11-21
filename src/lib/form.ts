@@ -8,6 +8,7 @@ import {
   SeparatorField,
   SpacerField,
   NumberField,
+  TextareaField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -49,6 +50,7 @@ export const INPUT_FIELDS: InputFieldsRecord = {
   TEXT: TextField,
   BOOLEAN: BooleanField,
   NUMBER: NumberField,
+  TEXTAREA: TextareaField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {

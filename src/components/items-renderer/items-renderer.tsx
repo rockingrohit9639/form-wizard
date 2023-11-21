@@ -10,6 +10,7 @@ import { LAYOUT_FIELDS } from '@/lib/form'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { Separator } from '../ui/separator'
+import { Textarea } from '../ui/textarea'
 
 export type BaseItem = {
   id: string
@@ -65,6 +66,16 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
           {...field}
         />
       ))
+      .with('TEXTAREA', () => (
+        <Textarea
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') e.currentTarget.blur()
+          }}
+          {...item.extraInputProps}
+          {...field}
+          rows={item.extraAttributes?.rows}
+        />
+      ))
       .exhaustive()
   }, [])
 
@@ -78,7 +89,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
           <FormItem>
             {FIELD_LABELS_TO_IGNORE.includes(item.type) ? null : (
               <FormLabel>
-                {item.label} {item.required ? <span className="text-red-500">*</span> : null}
+                {item.label} {item.required ? <span className="text-red-500"> *</span> : null}
               </FormLabel>
             )}
             <FormControl>{getFieldContent(item.type, item, field)}</FormControl>
