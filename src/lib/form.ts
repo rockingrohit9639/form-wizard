@@ -10,6 +10,7 @@ import {
   NumberField,
   TextareaField,
   DatePickerField,
+  SelectField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -33,7 +34,6 @@ export function getItemsFromFields(fields: FieldInstance[]): BaseItem[] {
     label: field.extraAttributes?.label,
     type: field.type,
     required: field.extraAttributes?.required,
-    extraInputProps: { placeholder: field.extraAttributes?.placeholder },
     description: field.extraAttributes?.helperText,
     extraAttributes: field.extraAttributes,
   }))
@@ -53,6 +53,7 @@ export const INPUT_FIELDS: InputFieldsRecord = {
   NUMBER: NumberField,
   TEXTAREA: TextareaField,
   DATE_PICKER: DatePickerField,
+  SELECT: SelectField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {

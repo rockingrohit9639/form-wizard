@@ -3,6 +3,7 @@
 import { match } from 'ts-pattern'
 import { useCallback } from 'react'
 import { Control, ControllerRenderProps } from 'react-hook-form'
+import { SelectValue } from '@radix-ui/react-select'
 import { FieldTypes } from '@/types/form'
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -12,6 +13,7 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '../ui/separator'
 import { Textarea } from '../ui/textarea'
 import DatePicker from '../date-picker'
+import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select'
 
 export type BaseItem = {
   id: string
@@ -19,8 +21,6 @@ export type BaseItem = {
   type: FieldTypes
   required?: boolean
   description?: string
-  /** props which are to be passed to the input elements */
-  extraInputProps?: Record<string, any>
   /** attributes which can be used for particular fields */
   extraAttributes?: Record<string, any>
 }
@@ -41,7 +41,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
           onKeyDown={(e) => {
             if (e.key === 'Enter') e.currentTarget.blur()
           }}
-          {...item.extraInputProps}
+          placeholder={item.extraAttributes?.placeholder}
           {...field}
         />
       ))
@@ -63,21 +63,33 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
           onKeyDown={(e) => {
             if (e.key === 'Enter') e.currentTarget.blur()
           }}
-          {...item.extraInputProps}
+          placeholder={item.extraAttributes?.placeholder}
           {...field}
         />
       ))
       .with('TEXTAREA', () => (
-        <Textarea
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') e.currentTarget.blur()
-          }}
-          {...item.extraInputProps}
-          {...field}
-          rows={item.extraAttributes?.rows}
-        />
+        <Textarea placeholder={item.extraAttributes?.placeholder} {...field} rows={item.extraAttributes?.rows} />
       ))
-      .with('DATE_PICKER', () => <DatePicker {...item.extraInputProps} {...field} />)
+      .with('DATE_PICKER', () => <DatePicker placeholder={item.extraAttributes?.placeholder} {...field} />)
+      .with('SELECT', () => {
+        const options = item.extraAttributes?.options?.split(',')?.filter(Boolean) as string[]
+
+        return (
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder={item.extraAttributes?.placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options &&
+                options.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+            </SelectContent>
+          </Select>
+        )
+      })
       .exhaustive()
   }, [])
 
