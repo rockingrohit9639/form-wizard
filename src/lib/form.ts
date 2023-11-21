@@ -19,10 +19,19 @@ export function generateFieldsValidationSchema(fields: FieldInstance[]) {
   const validationSchema: Record<string, z.ZodTypeAny> = {}
 
   fields.forEach((field) => {
-    const fieldSchema = field.extraAttributes?.required
-      ? z.string({ required_error: `${field.extraAttributes.label} is required!` })
-      : z.string().optional()
-    validationSchema[field.id] = fieldSchema
+    switch (field.type) {
+      case 'BOOLEAN': {
+        validationSchema[field.id] = z.boolean()
+        break
+      }
+
+      default: {
+        const fieldSchema = field.extraAttributes?.required
+          ? z.string({ required_error: `${field.extraAttributes.label} is required!` })
+          : z.string().optional()
+        validationSchema[field.id] = fieldSchema
+      }
+    }
   })
 
   return z.object(validationSchema)
