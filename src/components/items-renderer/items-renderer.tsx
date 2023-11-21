@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { Separator } from '../ui/separator'
 import { Textarea } from '../ui/textarea'
+import DatePicker from '../date-picker'
 
 export type BaseItem = {
   id: string
@@ -76,6 +77,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
           rows={item.extraAttributes?.rows}
         />
       ))
+      .with('DATE_PICKER', () => <DatePicker {...item.extraInputProps} {...field} />)
       .exhaustive()
   }, [])
 

@@ -9,6 +9,7 @@ import {
   SpacerField,
   NumberField,
   TextareaField,
+  DatePickerField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -51,6 +52,7 @@ export const INPUT_FIELDS: InputFieldsRecord = {
   BOOLEAN: BooleanField,
   NUMBER: NumberField,
   TEXTAREA: TextareaField,
+  DATE_PICKER: DatePickerField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {
