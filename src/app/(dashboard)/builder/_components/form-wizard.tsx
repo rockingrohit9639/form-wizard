@@ -11,17 +11,17 @@ import SaveFormButton from './save-form-button'
 import PublishFormButton from './publish-form-button'
 import Wizard from './wizard'
 import DragOverlayWrapper from './drag-overlay-wrapper'
-import useWizard from '@/hooks/use-wizard'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
+import { useWizardStore } from '@/stores'
 
 type FormWizardProps = {
   form: Form
 }
 
 export default function FormWizard({ form }: FormWizardProps) {
-  const { setFields } = useWizard()
+  const setFields = useWizardStore((state) => state.setFields)
   const [isReady, setIsReady] = useState(false) // to avoid delay while rendering
   const { toast } = useToast()
 

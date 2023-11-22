@@ -7,13 +7,17 @@ import invariant from 'tiny-invariant'
 import WizardSidebar from './wizard-sidebar'
 import { cn } from '@/lib/utils'
 import { FieldInstance, FieldTypes } from '@/types/form'
-import useWizard from '@/hooks/use-wizard'
 import { generateRandomId } from '@/lib/id'
 import { Button } from '@/components/ui/button'
 import { FORM_FIELDS } from '@/lib/form'
+import { useWizardStore } from '@/stores'
 
 export default function Wizard() {
-  const { fields, addField, removeField, selectedField, setSelectedField } = useWizard()
+  const fields = useWizardStore((state) => state.fields)
+  const addField = useWizardStore((state) => state.addField)
+  const removeField = useWizardStore((state) => state.removeField)
+  const selectedField = useWizardStore((state) => state.selectedField)
+  const setSelectedField = useWizardStore((state) => state.setSelectedField)
 
   const droppable = useDroppable({
     id: 'designer-drop-area',
@@ -136,7 +140,8 @@ export default function Wizard() {
 }
 
 function FieldWrapper({ field }: { field: FieldInstance }) {
-  const { removeField, setSelectedField } = useWizard()
+  const removeField = useWizardStore((state) => state.removeField)
+  const setSelectedField = useWizardStore((state) => state.setSelectedField)
   const [mouseIsOver, setMouseIsOver] = useState(false)
 
   const topHalf = useDroppable({

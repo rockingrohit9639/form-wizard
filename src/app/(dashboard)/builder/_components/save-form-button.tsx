@@ -1,12 +1,12 @@
 import { SaveIcon } from 'lucide-react'
 import { useTransition } from 'react'
 import { Button } from '@/components/ui/button'
-import useWizard from '@/hooks/use-wizard'
 import { useToast } from '@/components/ui/use-toast'
 import { updateFormContent } from '@/actions/form'
+import { useWizardStore } from '@/stores'
 
 export default function SaveFormButton({ id }: { id: string }) {
-  const { fields } = useWizard()
+  const fields = useWizardStore((state) => state.fields)
   const { toast } = useToast()
   const [loading, startTransition] = useTransition()
 

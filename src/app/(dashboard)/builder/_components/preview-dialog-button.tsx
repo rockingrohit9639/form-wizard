@@ -1,12 +1,12 @@
 import { ViewIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import useWizard from '@/hooks/use-wizard'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import ItemsRenderer from '@/components/items-renderer'
 import { getItemsFromFields } from '@/lib/form'
+import { useWizardStore } from '@/stores'
 
 export default function PreviewDialogButton() {
-  const { fields } = useWizard()
+  const fields = useWizardStore((state) => state.fields)
 
   const items = getItemsFromFields(fields)
 

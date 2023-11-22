@@ -5,14 +5,16 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import useWizard from '@/hooks/use-wizard'
 import { Separator } from '@/components/ui/separator'
 import { FORM_FIELDS } from '@/lib/form'
 import { Form } from '@/components/ui/form'
 import ItemsRenderer from '@/components/items-renderer'
+import { useWizardStore } from '@/stores'
 
 export default function FieldPropertiesSidebar() {
-  const { selectedField, setSelectedField, updateField } = useWizard()
+  const selectedField = useWizardStore((state) => state.selectedField)
+  const setSelectedField = useWizardStore((state) => state.setSelectedField)
+  const updateField = useWizardStore((state) => state.updateField)
   const fieldProperties = FORM_FIELDS[selectedField!.type]?.properties
   type PropertySchema = Record<string, string | number>
 

@@ -2,12 +2,12 @@ import { Active, DragOverlay, useDndMonitor } from '@dnd-kit/core'
 import { useState } from 'react'
 import { FormFieldOverlay } from './form-field'
 import { FieldTypes } from '@/types/form'
-import useWizard from '@/hooks/use-wizard'
 import { FORM_FIELDS } from '@/lib/form'
+import { useWizardStore } from '@/stores'
 
 export default function DragOverlayWrapper() {
   const [draggedItem, setDraggedItem] = useState<Active | null>(null)
-  const { fields } = useWizard()
+  const fields = useWizardStore((state) => state.fields)
 
   useDndMonitor({
     onDragStart(event) {

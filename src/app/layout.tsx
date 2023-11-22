@@ -5,7 +5,6 @@ import { ClerkProvider } from '@clerk/nextjs'
 import NextTopLoader from 'nextjs-toploader'
 import { ThemeProvider } from '@/components/providers'
 import { Toaster } from '@/components/ui/toaster'
-import WizardContextProvider from '@/contexts/wizard-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,13 +17,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <WizardContextProvider>
-            <ThemeProvider attribute="class">
-              <NextTopLoader />
-              <Toaster />
-              {children}
-            </ThemeProvider>
-          </WizardContextProvider>
+          <ThemeProvider attribute="class">
+            <NextTopLoader />
+            <Toaster />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
