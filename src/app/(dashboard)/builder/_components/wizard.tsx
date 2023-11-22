@@ -11,6 +11,7 @@ import { generateRandomId } from '@/lib/id'
 import { Button } from '@/components/ui/button'
 import { FORM_FIELDS } from '@/lib/form'
 import { useWizardStore } from '@/stores'
+import WizardMenu from './wizard-menu'
 
 export default function Wizard() {
   const fields = useWizardStore((state) => state.fields)
@@ -110,10 +111,12 @@ export default function Wizard() {
         <div
           ref={droppable.setNodeRef}
           className={cn(
-            'mx-auto flex h-full max-w-4xl flex-1 flex-grow-0 flex-col items-center justify-start overflow-y-auto rounded-md bg-background',
+            'relative mx-auto flex h-full max-w-4xl flex-1 flex-grow-0 flex-col items-center justify-start overflow-y-auto rounded-md bg-background',
             { 'ring-2 ring-primary/20': droppable.isOver },
           )}
         >
+          <WizardMenu className="sticky inset-x-0 left-0 top-0 z-30 bg-background" />
+
           {!droppable.isOver && fields.length === 0 ? (
             <div className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">Drop here</div>
           ) : null}
