@@ -12,6 +12,7 @@ import {
   DatePickerField,
   SelectField,
   RadioField,
+  CheckboxField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -65,6 +66,7 @@ export const INPUT_FIELDS: InputFieldsRecord = {
   DATE_PICKER: DatePickerField,
   SELECT: SelectField,
   RADIO: RadioField,
+  CHECKBOX: CheckboxField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {

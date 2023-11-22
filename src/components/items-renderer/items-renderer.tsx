@@ -15,6 +15,7 @@ import { Textarea } from '../ui/textarea'
 import DatePicker from '../date-picker'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
+import { Checkbox } from '../ui/checkbox'
 
 export type BaseItem = {
   id: string
@@ -95,7 +96,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
         const options = item.extraAttributes?.options?.split(',')?.filter(Boolean) as string[]
 
         return (
-          <RadioGroup>
+          <RadioGroup defaultValue={field?.value} onValueChange={field?.onChange} {...field}>
             {options?.map((option) => (
               <div key={option} className="flex items-center space-x-2">
                 <RadioGroupItem value={option} id={option} />
@@ -104,6 +105,23 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
             ))}
           </RadioGroup>
         )
+      })
+      .with('CHECKBOX', () => {
+        const options = item.extraAttributes?.options?.split(',')?.filter(Boolean) as string[]
+
+        return options?.map((option) => (
+          <div key={option} className="flex flex-row items-start space-x-3 space-y-0">
+            <Checkbox
+              checked={field?.value?.includes(option)}
+              onCheckedChange={(checked) => {
+                return checked
+                  ? field?.onChange([...field.value, option])
+                  : field?.onChange(field?.value?.filter((value: string) => value !== option))
+              }}
+            />
+            <Label className="font-normal">{option}</Label>
+          </div>
+        ))
       })
       .exhaustive()
   }, [])
