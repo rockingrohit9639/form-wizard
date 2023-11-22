@@ -1,28 +1,26 @@
-import { PanelTopOpenIcon } from 'lucide-react'
+import { ListIcon } from 'lucide-react'
 import { z } from 'zod'
 import { Field, FieldInstance, FieldTypes } from '@/types/form'
 import { Label } from '../ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 
-const type: FieldTypes = 'SELECT'
+const type: FieldTypes = 'RADIO'
 
 const extraAttributes = {
-  label: 'Select Field',
+  label: 'Radio Field',
   helperText: 'Helper Text',
   required: false,
-  placeholder: 'Select Option',
 }
 
 const propertiesSchema = z.object({
   label: z.string().min(2, 'Enter at least 2 characters!').max(50, 'Enter at most 50 characters'),
   helperText: z.string().max(200, 'Enter at most 200 characters'),
   required: z.boolean().default(false),
-  placeholder: z.string().max(50),
   options: z.string({ required_error: 'Please enter at least one option' }),
 })
 
 /** Definition of field */
-export const SelectField: Field = {
+export const RadioField: Field = {
   type,
   construct: (id) => ({
     id,
@@ -30,8 +28,8 @@ export const SelectField: Field = {
     extraAttributes,
   }),
   wizardButtonElement: {
-    icon: <PanelTopOpenIcon />,
-    label: 'Select',
+    icon: <ListIcon />,
+    label: 'Radio',
   },
   wizardField: WizardField,
   properties: {
@@ -42,13 +40,6 @@ export const SelectField: Field = {
         label: 'Label',
         type: 'TEXT',
         description: 'The label of the field. It will be displayed above the field!',
-        required: true,
-      },
-      {
-        id: 'placeholder',
-        label: 'Placeholder',
-        type: 'TEXT',
-        description: 'The placeholder of the field.',
         required: true,
       },
       {
@@ -72,12 +63,12 @@ export const SelectField: Field = {
   },
 }
 
-type SelectFieldInstance = FieldInstance & {
+type RadioFieldInstance = FieldInstance & {
   extraAttributes: typeof extraAttributes
 }
 
 function WizardField({ field }: { field: FieldInstance }) {
-  const _field = field as SelectFieldInstance
+  const _field = field as RadioFieldInstance
   const options = _field.extraAttributes?.options?.split(',')?.filter(Boolean) as string[]
 
   return (
@@ -87,19 +78,14 @@ function WizardField({ field }: { field: FieldInstance }) {
         {_field.extraAttributes.required ? <span className="text-red-500">*</span> : null}
       </Label>
 
-      <Select disabled>
-        <SelectTrigger>
-          <SelectValue placeholder={_field.extraAttributes.placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          {options &&
-            options.map((option) => (
-              <SelectItem key={option} value={option}>
-                {option}
-              </SelectItem>
-            ))}
-        </SelectContent>
-      </Select>
+      <RadioGroup>
+        {options?.map((option) => (
+          <div key={option} className="flex items-center space-x-2">
+            <RadioGroupItem value={option} id={option} />
+            <Label htmlFor={option}>{option}</Label>
+          </div>
+        ))}
+      </RadioGroup>
 
       {_field.extraAttributes.helperText ? (
         <p className="text-xs text-muted-foreground">{_field.extraAttributes.helperText}</p>

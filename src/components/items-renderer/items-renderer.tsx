@@ -14,6 +14,7 @@ import { Separator } from '../ui/separator'
 import { Textarea } from '../ui/textarea'
 import DatePicker from '../date-picker'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select'
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 
 export type BaseItem = {
   id: string
@@ -88,6 +89,20 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
                 ))}
             </SelectContent>
           </Select>
+        )
+      })
+      .with('RADIO', () => {
+        const options = item.extraAttributes?.options?.split(',')?.filter(Boolean) as string[]
+
+        return (
+          <RadioGroup>
+            {options?.map((option) => (
+              <div key={option} className="flex items-center space-x-2">
+                <RadioGroupItem value={option} id={option} />
+                <Label htmlFor={option}>{option}</Label>
+              </div>
+            ))}
+          </RadioGroup>
         )
       })
       .exhaustive()

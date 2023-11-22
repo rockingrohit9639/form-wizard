@@ -10,6 +10,7 @@ specifiers:
   '@radix-ui/react-icons': ^1.3.0
   '@radix-ui/react-label': ^2.0.2
   '@radix-ui/react-popover': ^1.0.7
+  '@radix-ui/react-radio-group': ^1.1.3
   '@radix-ui/react-select': ^2.0.0
   '@radix-ui/react-separator': ^1.0.3
   '@radix-ui/react-slot': ^1.0.2
@@ -64,6 +65,7 @@ dependencies:
   '@radix-ui/react-icons': 1.3.0_react@18.2.0
   '@radix-ui/react-label': 2.0.2_odyphbpq4up353b3xkkenmy5wy
   '@radix-ui/react-popover': 1.0.7_odyphbpq4up353b3xkkenmy5wy
+  '@radix-ui/react-radio-group': 1.1.3_odyphbpq4up353b3xkkenmy5wy
   '@radix-ui/react-select': 2.0.0_odyphbpq4up353b3xkkenmy5wy
   '@radix-ui/react-separator': 1.0.3_odyphbpq4up353b3xkkenmy5wy
   '@radix-ui/react-slot': 1.0.2_u5zja476buyywzbvglb2fbhaii
@@ -998,6 +1000,36 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.2
       '@radix-ui/react-slot': 1.0.2_u5zja476buyywzbvglb2fbhaii
+      '@types/react': 18.2.37
+      '@types/react-dom': 18.2.15
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@radix-ui/react-radio-group/1.1.3_odyphbpq4up353b3xkkenmy5wy:
+    resolution: {integrity: sha512-x+yELayyefNeKeTx4fjK6j99Fs6c4qKm3aY38G3swQVTN6xMpsrbigC0uHs2L//g8q4qR7qOcww8430jJmi2ag==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-compose-refs': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-context': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-direction': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-presence': 1.0.1_odyphbpq4up353b3xkkenmy5wy
+      '@radix-ui/react-primitive': 1.0.3_odyphbpq4up353b3xkkenmy5wy
+      '@radix-ui/react-roving-focus': 1.0.4_odyphbpq4up353b3xkkenmy5wy
+      '@radix-ui/react-use-controllable-state': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-use-previous': 1.0.1_u5zja476buyywzbvglb2fbhaii
+      '@radix-ui/react-use-size': 1.0.1_u5zja476buyywzbvglb2fbhaii
       '@types/react': 18.2.37
       '@types/react-dom': 18.2.15
       react: 18.2.0

@@ -11,6 +11,7 @@ import {
   TextareaField,
   DatePickerField,
   SelectField,
+  RadioField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -63,6 +64,7 @@ export const INPUT_FIELDS: InputFieldsRecord = {
   TEXTAREA: TextareaField,
   DATE_PICKER: DatePickerField,
   SELECT: SelectField,
+  RADIO: RadioField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {
