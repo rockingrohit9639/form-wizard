@@ -10,13 +10,13 @@ type WizardMenuProps = {
 }
 
 export default function WizardMenu({ className, style }: WizardMenuProps) {
-  const { undo, redo } = useTemporalStore((state) => state)
+  const { undo, redo, futureStates } = useTemporalStore((state) => state)
 
   useHotkeys('ctrl+z', () => {
     undo()
   })
 
-  useHotkeys('ctrl+shift+z', () => {
+  useHotkeys('ctrl+alt+z', () => {
     undo()
   })
 
@@ -32,6 +32,7 @@ export default function WizardMenu({ className, style }: WizardMenuProps) {
         <UndoIcon className="h-4 w-4 text-muted-foreground" />
       </Button>
       <Button
+        disabled={futureStates.length === 0}
         variant="ghost"
         size="icon"
         onClick={() => {
