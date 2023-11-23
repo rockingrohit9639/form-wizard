@@ -11,6 +11,7 @@ export type InputFieldTypes =
   | 'SELECT'
   | 'RADIO'
   | 'CHECKBOX'
+  | 'ASYNC_SELECT'
 
 export type FieldTypes = LayoutFieldTypes | InputFieldTypes
 

@@ -13,6 +13,7 @@ import {
   SelectField,
   RadioField,
   CheckboxField,
+  AsyncSelectField,
 } from '@/components/form-fields'
 import { FieldInstance, FormFieldsRecord, InputFieldsRecord, LayoutFieldsRecord } from '@/types/form'
 import { BaseItem } from '@/components/items-renderer'
@@ -67,6 +68,7 @@ export const INPUT_FIELDS: InputFieldsRecord = {
   SELECT: SelectField,
   RADIO: RadioField,
   CHECKBOX: CheckboxField,
+  ASYNC_SELECT: AsyncSelectField,
 }
 
 export const FORM_FIELDS: FormFieldsRecord = {

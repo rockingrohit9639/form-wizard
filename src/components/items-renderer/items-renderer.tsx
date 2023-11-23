@@ -16,6 +16,7 @@ import DatePicker from '../date-picker'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 import { Checkbox } from '../ui/checkbox'
+import AsyncSelector from './_components/async-selector'
 
 export type BaseItem = {
   id: string
@@ -77,7 +78,7 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
         const options = item.extraAttributes?.options?.split(',')?.filter(Boolean) as string[]
 
         return (
-          <Select>
+          <Select value={field?.value} onValueChange={field?.onChange}>
             <SelectTrigger>
               <SelectValue placeholder={item.extraAttributes?.placeholder} />
             </SelectTrigger>
@@ -122,6 +123,28 @@ export default function ItemsRenderer<T extends BaseItem>({ items, control }: It
             <Label className="font-normal">{option}</Label>
           </div>
         ))
+      })
+      .with('ASYNC_SELECT', () => {
+        const { api, accessToken, labelKey, valueKey } = item.extraAttributes ?? {}
+        if (![api, labelKey, valueKey].every(Boolean)) {
+          return (
+            <div className="rounded-md border py-4 text-center text-muted-foreground">
+              All fields are not selected yet
+            </div>
+          )
+        }
+
+        return (
+          <AsyncSelector
+            id={item.id}
+            api={api}
+            accessToken={accessToken}
+            labelKey={labelKey}
+            valueKey={valueKey}
+            placeholder={item.extraAttributes?.placeholder}
+            field={field}
+          />
+        )
       })
       .exhaustive()
   }, [])
