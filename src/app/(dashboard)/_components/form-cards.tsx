@@ -42,7 +42,7 @@ export default async function FormCards() {
           </Button>
         ) : (
           <Button variant="secondary" asChild>
-            <Link href={`/builder/${form.id}`} className="flex w-full items-center gap-2">
+            <Link href={`/builder/${form.id}/build`} className="flex w-full items-center gap-2">
               Edit
               <PencilIcon className="h-4 w-4" />
             </Link>

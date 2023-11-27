@@ -12,8 +12,6 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { useWizardStore } from '@/stores'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import PreviewDialogButton from './preview-dialog-button'
 
 type FormWizardProps = {
   form: Form
@@ -111,50 +109,9 @@ export default function FormWizard({ form }: FormWizardProps) {
 
   return (
     <DndContext sensors={sensors}>
-      <main className="flex w-full flex-col">
-        <Tabs defaultValue="build">
-          <div className="container relative flex items-center justify-center border-b">
-            <TabsList className="h-full rounded-none bg-transparent p-0">
-              <TabsTrigger
-                value="build"
-                className="rounded-none py-2 text-base hover:bg-secondary data-[state=active]:bg-secondary"
-              >
-                Build
-              </TabsTrigger>
-              <TabsTrigger
-                value="settings"
-                className="rounded-none py-2 text-base hover:bg-secondary data-[state=active]:bg-secondary"
-              >
-                Settings
-              </TabsTrigger>
-              <TabsTrigger
-                value="publish"
-                className="rounded-none py-2 text-base hover:bg-secondary data-[state=active]:bg-secondary"
-              >
-                Publish
-              </TabsTrigger>
-            </TabsList>
-
-            <div className="absolute right-4">
-              <PreviewDialogButton />
-            </div>
-          </div>
-
-          <TabsContent value="build" className="mt-0">
-            <div className="relative w-full items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-              <Wizard />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="settings" className="mt-0">
-            Settings
-          </TabsContent>
-
-          <TabsContent value="publish" className="mt-0">
-            Publish
-          </TabsContent>
-        </Tabs>
-      </main>
+      <div className="relative w-full items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+        <Wizard />
+      </div>
 
       <DragOverlayWrapper />
     </DndContext>

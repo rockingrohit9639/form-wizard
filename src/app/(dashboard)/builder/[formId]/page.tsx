@@ -1,12 +1,9 @@
-import { getFormById } from '@/actions/form'
-import FormWizard from '../_components/form-wizard'
+import { redirect } from 'next/navigation'
 
 type BuilderProps = {
   params: { formId: string }
 }
 
-export default async function Builder({ params }: BuilderProps) {
-  const form = await getFormById(params.formId)
-
-  return <FormWizard form={form} />
+export default function Builder({ params }: BuilderProps) {
+  return redirect(`/builder/${params.formId}/build`)
 }
