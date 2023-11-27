@@ -13,7 +13,7 @@ export default function PreviewDialogButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="ghost" size="sm">
           <ViewIcon className="mr-2 h-4 w-4" />
           Preview
         </Button>

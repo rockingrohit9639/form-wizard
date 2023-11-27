@@ -12,6 +12,9 @@ const extraAttributes = {
   helperText: 'Helper Text',
   required: false,
   placeholder: 'Select Option',
+  api: 'https://jsonplaceholder.typicode.com/posts',
+  labelKey: 'title',
+  valueKey: 'id',
 }
 
 const propertiesSchema = z.object({

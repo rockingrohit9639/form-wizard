@@ -6,15 +6,14 @@ import { useEffect, useState } from 'react'
 import { ArrowLeftIcon, ArrowRightIcon, Loader2Icon } from 'lucide-react'
 import Link from 'next/link'
 import Confetti from 'react-confetti'
-import PreviewDialogButton from './preview-dialog-button'
-import SaveFormButton from './save-form-button'
-import PublishFormButton from './publish-form-button'
 import Wizard from './wizard'
 import DragOverlayWrapper from './drag-overlay-wrapper'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { useWizardStore } from '@/stores'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import PreviewDialogButton from './preview-dialog-button'
 
 type FormWizardProps = {
   form: Form
@@ -113,25 +112,48 @@ export default function FormWizard({ form }: FormWizardProps) {
   return (
     <DndContext sensors={sensors}>
       <main className="flex w-full flex-col">
-        <nav className="flex items-center justify-between gap-3 border-b-2 p-4">
-          <h2 className="truncate font-medium">
-            <span className="mr-2 text-muted-foreground">Form:</span>
-            {form.name}
-          </h2>
-          <div className="flex items-center gap-2">
-            <PreviewDialogButton />
-            {!form.published ? (
-              <>
-                <SaveFormButton id={form.id} />
-                <PublishFormButton id={form.id} />
-              </>
-            ) : null}
-          </div>
-        </nav>
+        <Tabs defaultValue="build">
+          <div className="container relative flex items-center justify-center border-b">
+            <TabsList className="h-full rounded-none bg-transparent p-0">
+              <TabsTrigger
+                value="build"
+                className="rounded-none py-2 text-base hover:bg-secondary data-[state=active]:bg-secondary"
+              >
+                Build
+              </TabsTrigger>
+              <TabsTrigger
+                value="settings"
+                className="rounded-none py-2 text-base hover:bg-secondary data-[state=active]:bg-secondary"
+              >
+                Settings
+              </TabsTrigger>
+              <TabsTrigger
+                value="publish"
+                className="rounded-none py-2 text-base hover:bg-secondary data-[state=active]:bg-secondary"
+              >
+                Publish
+              </TabsTrigger>
+            </TabsList>
 
-        <div className="relative flex h-48 w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-          <Wizard />
-        </div>
+            <div className="absolute right-4">
+              <PreviewDialogButton />
+            </div>
+          </div>
+
+          <TabsContent value="build" className="mt-0">
+            <div className="relative w-full items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+              <Wizard />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="settings" className="mt-0">
+            Settings
+          </TabsContent>
+
+          <TabsContent value="publish" className="mt-0">
+            Publish
+          </TabsContent>
+        </Tabs>
       </main>
 
       <DragOverlayWrapper />
