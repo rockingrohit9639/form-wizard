@@ -9,3 +9,6 @@ export const createFormSchema = z.object({
 })
 
 export type CreateFormSchema = z.infer<typeof createFormSchema>
+
+export const updateFormSchema = createFormSchema.partial()
+export type UpdateFormSchema = z.infer<typeof updateFormSchema>

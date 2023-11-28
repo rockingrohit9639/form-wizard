@@ -12,7 +12,7 @@ export default function BuilderLayout({
     <div className="w-full">
       <div className="relative flex items-center justify-center border-b">
         <NavLink href={`/builder/${formId}/build`}>Build</NavLink>
-        <NavLink href={`/builder/${formId}/settings`}>Settings</NavLink>
+        <NavLink href={`/builder/${formId}/settings/basics`}>Settings</NavLink>
         <NavLink href={`/builder/${formId}/publish`}>Publish</NavLink>
 
         <div className="absolute right-4">
