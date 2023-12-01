@@ -1,2 +1,1 @@
-export * from './theme-provider'
-export * from './query-client-provider'
+export { default } from './providers'

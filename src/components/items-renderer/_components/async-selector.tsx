@@ -1,9 +1,9 @@
-import { useQuery } from 'react-query'
 import { ControllerRenderProps } from 'react-hook-form'
 import axios from 'axios'
 import { LoaderIcon, ShieldXIcon } from 'lucide-react'
 import { SelectProps } from '@radix-ui/react-select'
 import { useMemo } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 
