@@ -21,3 +21,31 @@ export async function updateForm(input: UpdateFormInput, user: User) {
 
   return prisma.form.update({ where: { id: input.id }, data: { name: input.name, description: input.description } })
 }
+
+export async function getFormsStats(user: User) {
+  const stats = await prisma.form.aggregate({
+    where: { userId: user.id },
+    _sum: { visits: true, submissions: true },
+  })
+
+  const visits = stats._sum.visits ?? 0
+  const submissions = stats._sum.submissions ?? 0
+
+  let submissionRate = 0
+  if (visits > 0) {
+    submissionRate = (submissions / visits) * 100
+  }
+
+  const bounceRate = 100 - submissionRate
+
+  return {
+    visits,
+    submissions,
+    submissionRate,
+    bounceRate,
+  }
+}
+
+export async function findUserForms(user: User) {
+  return prisma.form.findMany({ where: { userId: user.id } })
+}

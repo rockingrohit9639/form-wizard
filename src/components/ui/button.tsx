@@ -66,7 +66,7 @@ BaseButton.displayName = 'BaseButton'
 type ButtonProps = Omit<BaseButtonProps, 'asChild' | 'children'> & {
   loading?: boolean
   icon?: React.ReactElement<{ className?: string }>
-  children?: string
+  children?: React.ReactNode
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ loading, icon, children, ...props }, ref) => {

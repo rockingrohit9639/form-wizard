@@ -25,3 +25,12 @@ function getBaseUrl() {
 export function getUrl(path: string) {
   return `${getBaseUrl()}${path}`
 }
+
+export function range(start: number, end?: number, step: number = 1) {
+  if (end === undefined) {
+    end = start
+    start = 0
+  }
+  const length = Math.max(Math.ceil((end - start) / step), 0)
+  return Array.from({ length }, (_, index) => start + index * step)
+}
