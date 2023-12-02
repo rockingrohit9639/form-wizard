@@ -18,18 +18,18 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
-import { CreateFormSchema, createFormSchema } from '@/schema/form'
 import { createForm } from '@/actions/form'
+import { CreateFormInput, updateFormInput } from '@/server/api/form/form.input'
 
 export default function CreateFormButton() {
   const router = useRouter()
   const { toast } = useToast()
 
-  const form = useForm<CreateFormSchema>({
-    resolver: zodResolver(createFormSchema),
+  const form = useForm<CreateFormInput>({
+    resolver: zodResolver(updateFormInput),
   })
 
-  const onSubmit = async (values: CreateFormSchema) => {
+  const onSubmit = async (values: CreateFormInput) => {
     try {
       const form = await createForm(values)
       toast({ title: 'Form Created', description: 'Form created successfully!', variant: 'success' })

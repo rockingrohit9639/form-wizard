@@ -3,7 +3,7 @@
 import { auth } from '@clerk/nextjs'
 import { UserNotFoundError } from '@/lib/error'
 import prisma from '@/lib/db'
-import { CreateFormSchema, createFormSchema } from '@/schema/form'
+import { CreateFormInput, createFormInput } from '@/server/api/form/form.input'
 
 export async function getFormStats() {
   const { userId } = auth()
@@ -34,8 +34,8 @@ export async function getFormStats() {
   }
 }
 
-export async function createForm(data: CreateFormSchema) {
-  const result = createFormSchema.safeParse(data)
+export async function createForm(data: CreateFormInput) {
+  const result = createFormInput.safeParse(data)
   if (!result.success) {
     throw new Error('Form not valid!')
   }

@@ -1,7 +1,8 @@
-import { publicProcedure, router } from '../trpc'
+import { formRouter } from '../form/form.router'
+import { router } from '../trpc'
 
 export const appRouter = router({
-  test: publicProcedure.query(() => ({ message: 'Ok' })),
+  form: formRouter,
 })
 
 export type AppRouter = typeof appRouter

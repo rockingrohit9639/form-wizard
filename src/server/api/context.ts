@@ -1,12 +1,12 @@
-import { auth } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs'
 import { User } from '@clerk/nextjs/server'
 
 export type CreateContextOptions = {
   user?: User | null
 }
 
-export function createTRPCContext(): CreateContextOptions {
-  const { user } = auth()
+export async function createTRPCContext(): Promise<CreateContextOptions> {
+  const user = await currentUser()
 
   return { user }
 }
