@@ -18,25 +18,26 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
-import { createForm } from '@/actions/form'
 import { CreateFormInput, updateFormInput } from '@/server/api/form/form.input'
+import { trpc } from '@/lib/trpc/client'
 
 export default function CreateFormButton() {
   const router = useRouter()
   const { toast } = useToast()
+
+  const createFormMutation = trpc.form.createForm.useMutation({
+    onSuccess: (createdForm) => {
+      toast({ title: 'Form Created', description: 'Form created successfully!', variant: 'success' })
+      router.push(`/builder/${createdForm.id}`)
+    },
+  })
 
   const form = useForm<CreateFormInput>({
     resolver: zodResolver(updateFormInput),
   })
 
   const onSubmit = async (values: CreateFormInput) => {
-    try {
-      const form = await createForm(values)
-      toast({ title: 'Form Created', description: 'Form created successfully!', variant: 'success' })
-      router.push(`/builder/${form.id}`)
-    } catch (error) {
-      toast({ title: 'Error', description: 'Something went wrong, please try again later.', variant: 'destructive' })
-    }
+    createFormMutation.mutate(values)
   }
 
   return (
@@ -86,11 +87,7 @@ export default function CreateFormButton() {
             />
 
             <DialogFooter>
-              <Button
-                disabled={form.formState.isSubmitting || !form.formState.isValid}
-                className="mt-4 w-full"
-                type="submit"
-              >
+              <Button loading={createFormMutation.isLoading} className="mt-4 w-full" type="submit">
                 Save
               </Button>
             </DialogFooter>
