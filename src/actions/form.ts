@@ -4,20 +4,6 @@ import { auth } from '@clerk/nextjs'
 import { UserNotFoundError } from '@/lib/error'
 import prisma from '@/lib/db'
 
-export async function getFormById(id: string) {
-  const { userId } = auth()
-  if (!userId) {
-    throw new UserNotFoundError()
-  }
-
-  const form = await prisma.form.findUnique({ where: { id } })
-  if (!form) {
-    throw new Error('Form not found!')
-  }
-
-  return form
-}
-
 export async function updateFormContent(id: string, fields: string) {
   const { userId } = auth()
   if (!userId) {
@@ -55,13 +41,4 @@ export async function submitForm(shareUrl: string, content: string) {
     where: { shareUrl },
     data: { submissions: { increment: 1 }, formSubmissions: { create: { content } } },
   })
-}
-
-export async function getFormWithSubmissions(id: string) {
-  const { userId } = auth()
-  if (!userId) {
-    throw new UserNotFoundError()
-  }
-
-  return prisma.form.findUnique({ where: { id, userId }, include: { formSubmissions: true } })
 }

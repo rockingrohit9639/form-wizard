@@ -58,3 +58,7 @@ export async function createForm(input: CreateFormInput, user: User) {
     },
   })
 }
+
+export function getFormWithSubmissions(id: string, user: User) {
+  return prisma.form.findUnique({ where: { id, userId: user.id }, include: { formSubmissions: true } })
+}
