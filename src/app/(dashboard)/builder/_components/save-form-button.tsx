@@ -22,9 +22,8 @@ export default function SaveFormButton({ id }: { id: string }) {
   }
 
   return (
-    <Button variant="outline" loading={updateFormFieldsMutation.isLoading} onClick={saveForm}>
-      <SaveIcon className="mr-2 h-4 w-4" />
-      Save
+    <Button variant="ghost" size="icon" loading={updateFormFieldsMutation.isLoading} onClick={saveForm}>
+      <SaveIcon className="h-4 w-4 text-muted-foreground" />
     </Button>
   )
 }

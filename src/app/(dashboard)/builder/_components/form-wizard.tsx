@@ -88,14 +88,14 @@ export default function FormWizard({ form }: FormWizardProps) {
             </Button>
           </div>
           <div className="flex justify-between">
-            <Button variant="link" asChild>
+            <Button variant="link">
               <Link href="/">
                 <ArrowLeftIcon className="mr-2 h-4 w-4" />
                 Go back to home
               </Link>
             </Button>
 
-            <Button variant="link" asChild>
+            <Button variant="link">
               <Link href={`/forms/${form.id}`}>
                 Form Details
                 <ArrowRightIcon className="ml-2 h-4 w-4" />

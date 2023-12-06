@@ -1,8 +1,10 @@
 import { RedoIcon, UndoIcon } from 'lucide-react'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { useTemporalStore } from '@/stores'
 import { cn } from '@/lib/utils'
+import SaveFormButton from './save-form-button'
 
 type WizardMenuProps = {
   className?: string
@@ -11,6 +13,7 @@ type WizardMenuProps = {
 
 export default function WizardMenu({ className, style }: WizardMenuProps) {
   const { undo, redo, futureStates } = useTemporalStore((state) => state)
+  const { formId } = useParams<{ formId: string }>()
 
   useHotkeys('ctrl+z', () => {
     undo()
@@ -22,6 +25,8 @@ export default function WizardMenu({ className, style }: WizardMenuProps) {
 
   return (
     <div className={cn('flex w-full items-center justify-end gap-2 border-b px-4 py-2', className)} style={style}>
+      <SaveFormButton id={formId} />
+
       <Button
         variant="ghost"
         size="icon"
