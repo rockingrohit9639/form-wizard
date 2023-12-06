@@ -1,13 +1,15 @@
 import { z } from 'zod'
-import { protectedProcedure, router } from '../trpc'
-import { createFormInput, updateFormFieldsInput, updateFormInput } from './form.input'
+import { protectedProcedure, publicProcedure, router } from '../trpc'
+import { createFormInput, submitFormInput, updateFormFieldsInput, updateFormInput } from './form.input'
 import {
   createForm,
   findFormById,
+  findFormByShareUrl,
   findUserForms,
   getFormWithSubmissions,
   getFormsStats,
   publishForm,
+  submitForm,
   updateForm,
   updateFormFields,
 } from './form.service'
@@ -25,4 +27,6 @@ export const formRouter = router({
     .input(updateFormFieldsInput)
     .mutation(({ input, ctx }) => updateFormFields(input, ctx.user)),
   publishForm: protectedProcedure.input(z.string()).mutation(({ input, ctx }) => publishForm(input, ctx.user)),
+  findFormByShareUrl: protectedProcedure.input(z.string()).query(({ input }) => findFormByShareUrl(input)),
+  submitForm: publicProcedure.input(submitFormInput).mutation(({ input }) => submitForm(input)),
 })

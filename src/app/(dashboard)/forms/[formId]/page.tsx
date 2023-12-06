@@ -36,10 +36,8 @@ export default function FormDetails({ params }: { params: { formId: string } }) 
             </div>
           </div>
 
-          <div className="border-b border-muted py-4">
-            <div className="flex items-center justify-between gap-2">
-              <FormLinkShare shareUrl={form.shareUrl} />
-            </div>
+          <div className="flex items-center justify-between gap-2 border-b border-muted py-4">
+            <FormLinkShare shareUrl={form.shareUrl} />
           </div>
 
           <div className="grid w-full grid-cols-1 gap-4 pt-8 md:grid-cols-2 lg:grid-cols-4">

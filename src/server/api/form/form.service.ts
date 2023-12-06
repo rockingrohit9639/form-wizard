@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server'
 import { User } from '@clerk/nextjs/server'
 import prisma from '@/lib/db'
-import { CreateFormInput, UpdateFormFieldsInput, UpdateFormInput } from './form.input'
+import { CreateFormInput, SubmitFormInput, UpdateFormFieldsInput, UpdateFormInput } from './form.input'
 
 export async function findFormById(id: string) {
   const form = await prisma.form.findUnique({ where: { id } })
@@ -79,4 +79,15 @@ export async function publishForm(id: string, user: User) {
   }
 
   return prisma.form.update({ where: { id }, data: { published: true } })
+}
+
+export function findFormByShareUrl(shareUrl: string) {
+  return prisma.form.update({ where: { shareUrl }, data: { visits: { increment: 1 } } })
+}
+
+export function submitForm(input: SubmitFormInput) {
+  return prisma.form.update({
+    where: { shareUrl: input.shareUrl },
+    data: { submissions: { increment: 1 }, formSubmissions: { create: { content: input.fields } } },
+  })
 }

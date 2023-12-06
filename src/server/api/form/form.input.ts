@@ -20,3 +20,9 @@ export const updateFormFieldsInput = z.object({
   fields: z.string(),
 })
 export type UpdateFormFieldsInput = z.infer<typeof updateFormFieldsInput>
+
+export const submitFormInput = z.object({
+  shareUrl: z.string(),
+  fields: z.string(),
+})
+export type SubmitFormInput = z.infer<typeof submitFormInput>
