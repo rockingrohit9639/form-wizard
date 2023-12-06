@@ -14,3 +14,9 @@ export const updateFormInput = createFormInput.extend({
   id: z.string(),
 })
 export type UpdateFormInput = z.infer<typeof updateFormInput>
+
+export const updateFormFieldsInput = z.object({
+  id: z.string(),
+  fields: z.string(),
+})
+export type UpdateFormFieldsInput = z.infer<typeof updateFormFieldsInput>

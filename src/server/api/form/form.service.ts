@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server'
 import { User } from '@clerk/nextjs/server'
 import prisma from '@/lib/db'
-import { CreateFormInput, UpdateFormInput } from './form.input'
+import { CreateFormInput, UpdateFormFieldsInput, UpdateFormInput } from './form.input'
 
 export async function findFormById(id: string) {
   const form = await prisma.form.findUnique({ where: { id } })
@@ -61,4 +61,13 @@ export async function createForm(input: CreateFormInput, user: User) {
 
 export function getFormWithSubmissions(id: string, user: User) {
   return prisma.form.findUnique({ where: { id, userId: user.id }, include: { formSubmissions: true } })
+}
+
+export async function updateFormFields(input: UpdateFormFieldsInput, user: User) {
+  const form = await prisma.form.findUnique({ where: { id: input.id, userId: user.id } })
+  if (!form) {
+    throw new TRPCError({ message: 'Form not found!', code: 'NOT_FOUND' })
+  }
+
+  return prisma.form.update({ where: { id: input.id }, data: { content: input.fields } })
 }

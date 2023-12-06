@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { protectedProcedure, router } from '../trpc'
-import { createFormInput, updateFormInput } from './form.input'
+import { createFormInput, updateFormFieldsInput, updateFormInput } from './form.input'
 import {
   createForm,
   findFormById,
@@ -8,6 +8,7 @@ import {
   getFormWithSubmissions,
   getFormsStats,
   updateForm,
+  updateFormFields,
 } from './form.service'
 
 export const formRouter = router({
@@ -19,4 +20,7 @@ export const formRouter = router({
   getFormWithSubmissions: protectedProcedure
     .input(z.string())
     .query(({ input, ctx }) => getFormWithSubmissions(input, ctx.user)),
+  updateFormFields: protectedProcedure
+    .input(updateFormFieldsInput)
+    .mutation(({ input, ctx }) => updateFormFields(input, ctx.user)),
 })
