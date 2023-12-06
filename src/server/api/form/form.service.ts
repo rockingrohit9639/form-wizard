@@ -71,3 +71,12 @@ export async function updateFormFields(input: UpdateFormFieldsInput, user: User)
 
   return prisma.form.update({ where: { id: input.id }, data: { content: input.fields } })
 }
+
+export async function publishForm(id: string, user: User) {
+  const form = await prisma.form.findUnique({ where: { id, userId: user.id } })
+  if (!form) {
+    throw new TRPCError({ message: 'Form not found!', code: 'NOT_FOUND' })
+  }
+
+  return prisma.form.update({ where: { id }, data: { published: true } })
+}

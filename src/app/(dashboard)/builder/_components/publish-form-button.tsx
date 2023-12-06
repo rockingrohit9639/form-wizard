@@ -1,6 +1,4 @@
 import { FileUpIcon } from 'lucide-react'
-import { useTransition } from 'react'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import {
   AlertDialog,
@@ -14,23 +12,22 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { useToast } from '@/components/ui/use-toast'
-import { publishForm } from '@/actions/form'
+import { trpc } from '@/lib/trpc/client'
 
 export default function PublishFormButton({ id }: { id: string }) {
-  const [loading, startTransition] = useTransition()
   const { toast } = useToast()
-  const router = useRouter()
 
-  const publishNewForm = async () => {
-    try {
-      await publishForm(id)
-
+  const publishFormMutation = trpc.form.publishForm.useMutation({
+    onSuccess: () => {
       toast({ title: 'Success', description: 'You form is available to the public!', variant: 'success' })
-
-      router.refresh()
-    } catch {
+    },
+    onError: () => {
       toast({ title: 'Error', description: 'Something went wrong while publishing the form!', variant: 'destructive' })
-    }
+    },
+  })
+
+  const handlePublishForm = async () => {
+    publishFormMutation.mutate(id)
   }
 
   return (
@@ -59,13 +56,13 @@ export default function PublishFormButton({ id }: { id: string }) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            disabled={loading}
             onClick={(e) => {
               e.preventDefault()
-              startTransition(publishNewForm)
+              handlePublishForm()
             }}
+            asChild
           >
-            Proceed
+            <Button loading={publishFormMutation.isLoading}>Proceed</Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

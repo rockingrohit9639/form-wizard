@@ -7,6 +7,7 @@ import {
   findUserForms,
   getFormWithSubmissions,
   getFormsStats,
+  publishForm,
   updateForm,
   updateFormFields,
 } from './form.service'
@@ -23,4 +24,5 @@ export const formRouter = router({
   updateFormFields: protectedProcedure
     .input(updateFormFieldsInput)
     .mutation(({ input, ctx }) => updateFormFields(input, ctx.user)),
+  publishForm: protectedProcedure.input(z.string()).mutation(({ input, ctx }) => publishForm(input, ctx.user)),
 })
