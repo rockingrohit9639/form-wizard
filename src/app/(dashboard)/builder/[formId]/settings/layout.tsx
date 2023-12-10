@@ -1,4 +1,4 @@
-import { SettingsIcon } from 'lucide-react'
+import { MailIcon, SettingsIcon } from 'lucide-react'
 import NavLink from './_components/nav-link'
 
 const MENU_ITEMS: Array<{ icon: React.ReactElement; title: string; description: string; link: string }> = [
@@ -7,6 +7,12 @@ const MENU_ITEMS: Array<{ icon: React.ReactElement; title: string; description: 
     title: 'Settings',
     description: 'Customize form properties',
     link: '/basics',
+  },
+  {
+    icon: <MailIcon />,
+    title: 'Emails',
+    description: 'Receive Notifications',
+    link: '/emails',
   },
 ]
 
@@ -19,7 +25,7 @@ export default function SettingsLayout({
 }) {
   return (
     <main className="container grid h-[88.8vh] grid-cols-8 border-r">
-      <div className="col-span-2 flex h-full flex-col gap-2 divide-y border-x">
+      <div className="col-span-2 flex h-full flex-col divide-y border-x">
         {MENU_ITEMS.map((item) => (
           <NavLink key={item.link} href={`/builder/${formId}/settings${item.link}`} {...item} />
         ))}
