@@ -9,7 +9,7 @@ export default function BuilderLayout({
   params: { formId: string }
 }) {
   return (
-    <div className="w-full">
+    <div className="h-[calc(100vh-4rem)] w-full overflow-hidden">
       <div className="relative flex items-center justify-center border-b">
         <NavLink href={`/builder/${formId}/build`}>Build</NavLink>
         <NavLink href={`/builder/${formId}/settings/basics`}>Settings</NavLink>

@@ -109,7 +109,7 @@ export default function FormWizard({ form }: FormWizardProps) {
 
   return (
     <DndContext sensors={sensors}>
-      <div className="relative w-full items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+      <div className="relative h-[calc(100vh-6rem)] w-full items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
         <Wizard />
       </div>
 
