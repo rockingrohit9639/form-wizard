@@ -18,7 +18,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
-import { CreateFormInput, updateFormInput } from '@/server/api/form/form.input'
+import { CreateFormInput, createFormInput } from '@/server/api/form/form.input'
 import { trpc } from '@/lib/trpc/client'
 
 export default function CreateFormButton() {
@@ -33,7 +33,7 @@ export default function CreateFormButton() {
   })
 
   const form = useForm<CreateFormInput>({
-    resolver: zodResolver(updateFormInput),
+    resolver: zodResolver(createFormInput),
   })
 
   const onSubmit = async (values: CreateFormInput) => {

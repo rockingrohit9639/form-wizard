@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --no-error-on-unmatched-pattern --write \"src/**/*.{ts,tsx}\" *.{ts,tsx}"
+    "format": "prettier --no-error-on-unmatched-pattern --write \"src/**/*.{ts,tsx}\" *.{ts,tsx}",
+    "db:generate": "prisma generate",
+    "db:migrate-dev": "prisma migrate dev"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.1",
