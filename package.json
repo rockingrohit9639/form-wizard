@@ -9,7 +9,9 @@
     "lint": "next lint",
     "format": "prettier --no-error-on-unmatched-pattern --write \"src/**/*.{ts,tsx}\" *.{ts,tsx}",
     "db:generate": "prisma generate",
-    "db:migrate-dev": "prisma migrate dev"
+    "db:migrate-dev": "prisma migrate dev",
+    "db:migrate-prod": "prisma migrate deploy",
+    "postinstall": "pnpm db:migrate-prod"
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.23",

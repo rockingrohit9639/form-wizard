@@ -78,6 +78,10 @@ export async function publishForm(id: string, user: User) {
     throw new TRPCError({ message: 'Form not found!', code: 'NOT_FOUND' })
   }
 
+  if (form.published) {
+    throw new TRPCError({ message: 'Form is already published', code: 'BAD_REQUEST' })
+  }
+
   return prisma.form.update({ where: { id }, data: { published: true } })
 }
 

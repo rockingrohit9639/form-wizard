@@ -56,7 +56,7 @@ export default function Basics({ params }: { params: { formId: string } }) {
       <div className="space-y-4 p-4">
         <div className="flex items-center gap-4">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary">
-            <SettingsIcon className="h-6 w-6" />
+            <SettingsIcon className="h-6 w-6 text-white" />
           </div>
           <div>
             <h1 className="text-lg font-bold uppercase">Form Settings</h1>
