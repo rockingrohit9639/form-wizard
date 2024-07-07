@@ -12,6 +12,7 @@
     "db:migrate-dev": "prisma migrate dev"
   },
   "dependencies": {
+    "@ai-sdk/google": "^0.0.23",
     "@clerk/nextjs": "^4.27.1",
     "@dnd-kit/core": "^6.1.0",
     "@hookform/resolvers": "^3.3.2",
@@ -29,12 +30,14 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.5",
+    "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^4.18.0",
     "@tinymce/tinymce-react": "^4.3.2",
     "@trpc/client": "^10.44.1",
     "@trpc/next": "^10.44.1",
     "@trpc/react-query": "^10.44.1",
     "@trpc/server": "^10.44.1",
+    "ai": "^3.2.10",
     "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

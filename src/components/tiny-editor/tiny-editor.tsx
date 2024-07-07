@@ -1,11 +1,12 @@
 import { Editor, IAllProps } from '@tinymce/tinymce-react'
+import { env } from '@/env.mjs'
 
 type TinyEditorProps = Omit<IAllProps, 'apiKey' | 'init'>
 
 export default function TinyEditor(props: TinyEditorProps) {
   return (
     <Editor
-      apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
+      apiKey={env.NEXT_PUBLIC_TINY_MCE_KEY}
       init={{
         plugins: 'anchor autolink charmap codesample emoticons image link lists table wordcount',
         toolbar:
